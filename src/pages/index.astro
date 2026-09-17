@@ -10,6 +10,13 @@ const checklistRight = [
 	"Transporte a citas médicas y traslados programados.",
 	"Servicios complementarios para una recuperación integral.",
 ];
+
+const stats = [
+	{ icon: "stethoscope", value: "9,999", label: "Trusted Client" },
+	{ icon: "caring-hands", value: "9,999", label: "Trusted Client" },
+	{ icon: "clipboard", value: "9,999", label: "Trusted Client" },
+	{ icon: "hospital", value: "9,999", label: "Trusted Client" },
+];
 ---
 
 <html lang="es">
@@ -130,6 +137,108 @@ const checklistRight = [
 					src={`${base}/videos/bellas-casa-de-recuperacion.mp4`}
 				></video>
 			</dialog>
+		</section>
+
+		<section class="trust">
+			<div class="trust__container">
+				{stats.map((stat) => (
+					<div class="trust__item">
+						<span class="trust__icon" aria-hidden="true">
+							{stat.icon === "stethoscope" && (
+								<svg viewBox="0 0 64 64" width="56" height="56" fill="none">
+									<path
+										d="M20 8v16a10 10 0 0 0 20 0V8"
+										stroke="white"
+										stroke-width="2.5"
+										stroke-linecap="round"
+									></path>
+									<circle cx="20" cy="8" r="3" stroke="white" stroke-width="2.5"></circle>
+									<circle cx="40" cy="8" r="3" stroke="white" stroke-width="2.5"></circle>
+									<path
+										d="M30 32v6a12 12 0 0 0 24 0v-3"
+										stroke="white"
+										stroke-width="2.5"
+										stroke-linecap="round"
+									></path>
+									<circle cx="54" cy="35" r="4" stroke="white" stroke-width="2.5"></circle>
+								</svg>
+							)}
+							{stat.icon === "caring-hands" && (
+								<svg viewBox="0 0 64 64" width="56" height="56" fill="none">
+									<path
+										d="M32 16c-3-5-11-5-13 1-2 5 2 9 13 18 11-9 15-13 13-18-2-6-10-6-13-1Z"
+										stroke="white"
+										stroke-width="2.5"
+										stroke-linejoin="round"
+									></path>
+									<path d="M28 24h3l-2 3h4l-2 3" stroke="white" stroke-width="2" stroke-linejoin="round"></path>
+									<path
+										d="M10 44c4-4 8-6 8-6s3-2 6 1c2 2 1 5-1 6-3 1-8 1-8 1"
+										stroke="white"
+										stroke-width="2.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									></path>
+									<path
+										d="M54 44c-4-4-8-6-8-6s-3-2-6 1c-2 2-1 5 1 6 3 1 8 1 8 1"
+										stroke="white"
+										stroke-width="2.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									></path>
+									<path
+										d="M8 46c-2 3-2 7 0 9M56 46c2 3 2 7 0 9"
+										stroke="white"
+										stroke-width="2.5"
+										stroke-linecap="round"
+									></path>
+								</svg>
+							)}
+							{stat.icon === "clipboard" && (
+								<svg viewBox="0 0 64 64" width="56" height="56" fill="none">
+									<rect x="14" y="10" width="36" height="46" rx="4" stroke="white" stroke-width="2.5"></rect>
+									<rect x="24" y="6" width="16" height="8" rx="2" stroke="white" stroke-width="2.5"></rect>
+									<rect x="21" y="26" width="6" height="6" rx="1" stroke="white" stroke-width="2"></rect>
+									<path d="M33 29h11" stroke="white" stroke-width="2.5" stroke-linecap="round"></path>
+									<rect x="21" y="37" width="6" height="6" rx="1" stroke="white" stroke-width="2"></rect>
+									<path d="M33 40h11" stroke="white" stroke-width="2.5" stroke-linecap="round"></path>
+									<rect x="21" y="48" width="6" height="6" rx="1" stroke="white" stroke-width="2"></rect>
+									<path d="M33 51h11" stroke="white" stroke-width="2.5" stroke-linecap="round"></path>
+								</svg>
+							)}
+							{stat.icon === "hospital" && (
+								<svg viewBox="0 0 64 64" width="56" height="56" fill="none">
+									<rect x="6" y="30" width="14" height="24" stroke="white" stroke-width="2.5"></rect>
+									<rect x="44" y="30" width="14" height="24" stroke="white" stroke-width="2.5"></rect>
+									<rect x="20" y="16" width="24" height="38" stroke="white" stroke-width="2.5"></rect>
+									<circle cx="32" cy="10" r="7" stroke="white" stroke-width="2.5"></circle>
+									<path d="M32 6.5v7M28.5 10h7" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+									<path d="M26 23h12M26 30h12" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+									<path
+										d="M6 46h6l3-6 4 10 3-7 2 3h6l3-6 4 10 3-7 2 3h6"
+										stroke="white"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									></path>
+								</svg>
+							)}
+						</span>
+
+						<svg class="trust__people" viewBox="0 0 32 24" width="28" height="21" fill="#8FD9C9" aria-hidden="true">
+							<circle cx="10" cy="7" r="5"></circle>
+							<circle cx="22" cy="7" r="5"></circle>
+							<path d="M0 24c0-6 5-10 10-10s10 4 10 10Z"></path>
+							<path d="M12 24c0-6 5-10 10-10s10 4 10 10Z"></path>
+						</svg>
+
+						<p class="trust__number">
+							<span class="trust__accent">+</span>{stat.value}<span class="trust__accent">K</span>
+						</p>
+						<p class="trust__label">{stat.label}</p>
+					</div>
+				))}
+			</div>
 		</section>
 
 		<script>
@@ -396,5 +505,66 @@ const checklistRight = [
 		font-size: 22px;
 		line-height: 1;
 		cursor: pointer;
+	}
+
+	.trust {
+		background: #5b928f;
+		padding: 72px 0;
+	}
+
+	.trust__container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 32px;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 32px;
+	}
+
+	.trust__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 14px;
+	}
+
+	.trust__icon {
+		display: inline-flex;
+	}
+
+	.trust__number {
+		margin: 0;
+		color: white;
+		font-family: "Poppins", "Segoe UI", sans-serif;
+		font-size: 34px;
+		font-weight: 700;
+		line-height: 1;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.trust__accent {
+		color: rgba(255, 255, 255, 0.55);
+		font-weight: 600;
+	}
+
+	.trust__label {
+		margin: 0;
+		color: white;
+		font-weight: 600;
+		font-size: 15px;
+	}
+
+	@media (max-width: 900px) {
+		.trust__container {
+			grid-template-columns: repeat(2, 1fr);
+			row-gap: 48px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.trust__container {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
