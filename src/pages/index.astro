@@ -1,4 +1,5 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const checklistLeft = [
 	"Hospedaje cómodo y adaptado para tu recuperación.",
 	"Cuidado de enfermería y cuidadoras las 24 horas.",
@@ -14,8 +15,8 @@ const checklistRight = [
 <html lang="es">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+		<link rel="icon" href={`${base}/favicon.ico`} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Webbellas</title>
@@ -109,14 +110,53 @@ const checklistRight = [
 						width="360"
 						height="320"
 					/>
-					<button class="about__play" aria-label="Reproducir video" type="button">
+					<button id="about-play" class="about__play" aria-label="Reproducir video" type="button">
 						<svg viewBox="0 0 24 24" width="20" height="20">
 							<path d="M8 5v14l11-7z" fill="white"></path>
 						</svg>
 					</button>
 				</div>
 			</div>
+
+			<dialog id="about-video-dialog" class="video-dialog">
+				<button id="about-video-close" class="video-dialog__close" aria-label="Cerrar video" type="button">
+					&times;
+				</button>
+				<video
+					id="about-video"
+					class="video-dialog__video"
+					controls
+					playsinline
+					src={`${base}/videos/bellas-casa-de-recuperacion.mp4`}
+				></video>
+			</dialog>
 		</section>
+
+		<script>
+			const dialog = document.getElementById("about-video-dialog") as HTMLDialogElement;
+			const video = document.getElementById("about-video") as HTMLVideoElement;
+			const openButton = document.getElementById("about-play");
+			const closeButton = document.getElementById("about-video-close");
+
+			function closeDialog() {
+				video.pause();
+				dialog.close();
+			}
+
+			openButton?.addEventListener("click", () => {
+				dialog.showModal();
+				video.currentTime = 0;
+				video.play();
+			});
+
+			closeButton?.addEventListener("click", closeDialog);
+
+			dialog.addEventListener("click", (event) => {
+				if (event.target === dialog) closeDialog();
+			});
+
+			dialog.addEventListener("close", () => video.pause());
+		</script>
 	</body>
 </html>
 
@@ -318,5 +358,43 @@ const checklistRight = [
 		.about__media {
 			height: 340px;
 		}
+	}
+
+	.video-dialog {
+		position: fixed;
+		inset: 0;
+		margin: auto;
+		width: min(900px, 92vw);
+		padding: 0;
+		border: none;
+		border-radius: 12px;
+		background: black;
+		overflow: visible;
+	}
+
+	.video-dialog::backdrop {
+		background: rgba(15, 23, 27, 0.75);
+	}
+
+	.video-dialog__video {
+		display: block;
+		width: 100%;
+		max-height: 80vh;
+		border-radius: 12px;
+	}
+
+	.video-dialog__close {
+		position: absolute;
+		top: -44px;
+		right: 0;
+		width: 36px;
+		height: 36px;
+		border: none;
+		border-radius: 50%;
+		background: white;
+		color: #17212b;
+		font-size: 22px;
+		line-height: 1;
+		cursor: pointer;
 	}
 </style>
