@@ -1,9 +1,17 @@
 ---
-const checklistLeft = ["Disease Prevention", "Early Diagnosis & Treatment", "Best Technology"];
-const checklistRight = ["Improved Quality of Life", "Emergency Care & Trauma Services", "Advanced Medical"];
+const checklistLeft = [
+	"Hospedaje cómodo y adaptado para tu recuperación.",
+	"Cuidado de enfermería y cuidadoras las 24 horas.",
+	"Nutrición especializada para favorecer tu recuperación.",
+];
+const checklistRight = [
+	"Servicio de limpieza y lavandería.",
+	"Transporte a citas médicas y traslados programados.",
+	"Servicios complementarios para una recuperación integral.",
+];
 ---
 
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -27,13 +35,16 @@ const checklistRight = ["Improved Quality of Life", "Emergency Care & Trauma Ser
 				<div class="about__content">
 					<p class="about__eyebrow">About Us</p>
 					<h2 class="about__title">
-						Providing Exceptional<br />
-						Healthcare for All
+						Casa de Recuperación<br />
+						Bellas Te Cuida en Medellín
 					</h2>
 					<p class="about__lead">
-						Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Fusce vitae commodo
-						ipsum, eu ullam corper magna. Nam non posuere lacus, eget viverra massa.
-						Sed magna ligula, lacinia sit amet bibendum eu, porta nec ante.
+						El cuidado postoperatorio que necesitas, con la calidad humana que mereces. En
+						Bellas Te Cuida somos una Recovery House en Medellín con más de 10 años de
+						experiencia, especializada en el acompañamiento integral de pacientes de
+						cirugía plástica, estética y reconstructiva. Nos dedicamos a brindarte una
+						recuperación segura, cómoda y tranquila, respaldada por un equipo comprometido
+						con tu bienestar en cada etapa del proceso.
 					</p>
 
 					<div class="about__columns">
@@ -48,6 +59,8 @@ const checklistRight = ["Improved Quality of Life", "Emergency Care & Trauma Ser
 					</div>
 
 					<hr class="about__divider" />
+
+					<p class="about__checklist-intro">En nuestra Recovery House encontrarás:</p>
 
 					<div class="about__checklist">
 						<ul>
@@ -218,6 +231,13 @@ const checklistRight = ["Improved Quality of Life", "Emergency Care & Trauma Ser
 		border: none;
 		border-top: 1px solid rgba(20, 166, 158, 0.3);
 		margin: 0 0 32px;
+	}
+
+	.about__checklist-intro {
+		margin: 0 0 16px;
+		color: #17212b;
+		font-weight: 700;
+		font-size: 16px;
 	}
 
 	.about__checklist {
