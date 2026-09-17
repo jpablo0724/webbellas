@@ -1,5 +1,6 @@
 ---
-
+const checklistLeft = ["Disease Prevention", "Early Diagnosis & Treatment", "Best Technology"];
+const checklistRight = ["Improved Quality of Life", "Emergency Care & Trauma Services", "Advanced Medical"];
 ---
 
 <html lang="en">
@@ -9,9 +10,317 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Webbellas</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<section class="about">
+			<div class="about__blob"></div>
+			<div class="about__ring"></div>
+
+			<div class="about__container">
+				<div class="about__content">
+					<p class="about__eyebrow">About Us</p>
+					<h2 class="about__title">
+						Providing Exceptional<br />
+						Healthcare for All
+					</h2>
+					<p class="about__lead">
+						Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Fusce vitae commodo
+						ipsum, eu ullam corper magna. Nam non posuere lacus, eget viverra massa.
+						Sed magna ligula, lacinia sit amet bibendum eu, porta nec ante.
+					</p>
+
+					<div class="about__columns">
+						<div>
+							<h3>Our Vision</h3>
+							<p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Ut elit tellus.</p>
+						</div>
+						<div>
+							<h3>Our Mission</h3>
+							<p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Ut elit tellus.</p>
+						</div>
+					</div>
+
+					<hr class="about__divider" />
+
+					<div class="about__checklist">
+						<ul>
+							{checklistLeft.map((item) => (
+								<li>
+									<span class="about__check" aria-hidden="true">
+										<svg viewBox="0 0 16 16" width="12" height="12">
+											<path
+												d="M2 8.5 6 12l8-8"
+												fill="none"
+												stroke="white"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											></path>
+										</svg>
+									</span>
+									{item}
+								</li>
+							))}
+						</ul>
+						<ul>
+							{checklistRight.map((item) => (
+								<li>
+									<span class="about__check" aria-hidden="true">
+										<svg viewBox="0 0 16 16" width="12" height="12">
+											<path
+												d="M2 8.5 6 12l8-8"
+												fill="none"
+												stroke="white"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											></path>
+										</svg>
+									</span>
+									{item}
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
+
+				<div class="about__media">
+					<img
+						class="about__img about__img--main"
+						src="https://loremflickr.com/560/480/doctor,team"
+						alt="Equipo médico"
+						width="560"
+						height="480"
+					/>
+					<img
+						class="about__img about__img--secondary"
+						src="https://loremflickr.com/360/320/doctor,baby"
+						alt="Doctor atendiendo a una paciente"
+						width="360"
+						height="320"
+					/>
+					<button class="about__play" aria-label="Reproducir video" type="button">
+						<svg viewBox="0 0 24 24" width="20" height="20">
+							<path d="M8 5v14l11-7z" fill="white"></path>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</section>
 	</body>
 </html>
+
+<style>
+	:global(html) {
+		font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+	}
+
+	:global(body) {
+		margin: 0;
+		color: #3a4750;
+	}
+
+	.about {
+		position: relative;
+		overflow: hidden;
+		background: #eef2f2;
+		padding: 96px 0;
+	}
+
+	.about__blob {
+		position: absolute;
+		top: -180px;
+		left: -220px;
+		width: 620px;
+		height: 620px;
+		border-radius: 50%;
+		background: radial-gradient(circle at 60% 40%, rgba(20, 166, 158, 0.16), rgba(20, 166, 158, 0) 70%);
+	}
+
+	.about__ring {
+		position: absolute;
+		top: 50%;
+		right: -120px;
+		width: 780px;
+		height: 780px;
+		border-radius: 50%;
+		border: 1px solid rgba(20, 166, 158, 0.25);
+		transform: translateY(-50%);
+	}
+
+	.about__container {
+		position: relative;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 32px;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 64px;
+		align-items: center;
+	}
+
+	.about__eyebrow {
+		margin: 0 0 16px;
+		color: #14a69e;
+		font-weight: 700;
+		font-size: 13px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+	}
+
+	.about__title {
+		margin: 0 0 24px;
+		color: #17212b;
+		font-family: "Poppins", "Segoe UI", sans-serif;
+		font-size: 42px;
+		line-height: 1.2;
+		font-weight: 800;
+	}
+
+	.about__lead {
+		margin: 0 0 40px;
+		color: #7c8892;
+		font-size: 16px;
+		line-height: 1.7;
+		max-width: 46ch;
+	}
+
+	.about__columns {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+		margin-bottom: 32px;
+	}
+
+	.about__columns h3 {
+		margin: 0 0 12px;
+		color: #17212b;
+		font-family: "Poppins", "Segoe UI", sans-serif;
+		font-size: 20px;
+		font-weight: 700;
+	}
+
+	.about__columns p {
+		margin: 0;
+		color: #7c8892;
+		font-size: 15px;
+		line-height: 1.6;
+	}
+
+	.about__divider {
+		border: none;
+		border-top: 1px solid rgba(20, 166, 158, 0.3);
+		margin: 0 0 32px;
+	}
+
+	.about__checklist {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0 24px;
+	}
+
+	.about__checklist ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.about__checklist li {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		color: #2f3b44;
+		font-weight: 600;
+		font-size: 15px;
+	}
+
+	.about__check {
+		flex: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		background: #14a69e;
+	}
+
+	.about__media {
+		position: relative;
+		height: 520px;
+	}
+
+	.about__img {
+		position: absolute;
+		object-fit: cover;
+		border-radius: 12px;
+		box-shadow: 0 24px 48px rgba(23, 33, 43, 0.18);
+	}
+
+	.about__img--main {
+		top: 0;
+		right: 0;
+		width: 74%;
+		height: 66%;
+	}
+
+	.about__img--secondary {
+		left: 0;
+		bottom: 0;
+		width: 54%;
+		height: 46%;
+		border: 6px solid #eef2f2;
+	}
+
+	.about__play {
+		position: absolute;
+		top: 45%;
+		left: 42%;
+		transform: translate(-50%, -50%);
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		border: none;
+		background: #14d9c6;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 12px 24px rgba(20, 217, 198, 0.45);
+		cursor: pointer;
+	}
+
+	@media (max-width: 900px) {
+		.about__container {
+			grid-template-columns: 1fr;
+		}
+
+		.about__title {
+			font-size: 32px;
+		}
+
+		.about__media {
+			height: 420px;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.about__columns,
+		.about__checklist {
+			grid-template-columns: 1fr;
+		}
+
+		.about__media {
+			height: 340px;
+		}
+	}
+</style>
