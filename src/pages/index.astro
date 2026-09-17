@@ -12,10 +12,34 @@ const checklistRight = [
 ];
 
 const stats = [
-	{ icon: "stethoscope", value: "9,999", label: "Trusted Client" },
-	{ icon: "caring-hands", value: "9,999", label: "Trusted Client" },
-	{ icon: "clipboard", value: "9,999", label: "Trusted Client" },
-	{ icon: "hospital", value: "9,999", label: "Trusted Client" },
+	{
+		icon: "stethoscope",
+		value: "10",
+		suffix: "+",
+		label: "Años de experiencia",
+		description: "Especialistas en cuidado postoperatorio.",
+	},
+	{
+		icon: "caring-hands",
+		value: "1.000",
+		suffix: "+",
+		label: "Recuperaciones exitosas",
+		description: "Pacientes nacionales e internacionales.",
+	},
+	{
+		icon: "clipboard",
+		value: "15",
+		suffix: "+",
+		label: "Aliados estratégicos",
+		description: "Para una atención integral.",
+	},
+	{
+		icon: "hospital",
+		value: "14",
+		suffix: "",
+		label: "Servicios especializados",
+		description: "Todo para tu recuperación en un mismo lugar.",
+	},
 ];
 ---
 
@@ -225,17 +249,11 @@ const stats = [
 							)}
 						</span>
 
-						<svg class="trust__people" viewBox="0 0 32 24" width="28" height="21" fill="#8FD9C9" aria-hidden="true">
-							<circle cx="10" cy="7" r="5"></circle>
-							<circle cx="22" cy="7" r="5"></circle>
-							<path d="M0 24c0-6 5-10 10-10s10 4 10 10Z"></path>
-							<path d="M12 24c0-6 5-10 10-10s10 4 10 10Z"></path>
-						</svg>
-
 						<p class="trust__number">
-							<span class="trust__accent">+</span>{stat.value}<span class="trust__accent">K</span>
+							{stat.value}<span class="trust__accent">{stat.suffix}</span>
 						</p>
 						<p class="trust__label">{stat.label}</p>
+						<p class="trust__desc">{stat.description}</p>
 					</div>
 				))}
 			</div>
@@ -526,7 +544,9 @@ const stats = [
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-		gap: 14px;
+		gap: 10px;
+		max-width: 240px;
+		margin: 0 auto;
 	}
 
 	.trust__icon {
@@ -551,8 +571,16 @@ const stats = [
 	.trust__label {
 		margin: 0;
 		color: white;
+		font-family: "Poppins", "Segoe UI", sans-serif;
 		font-weight: 600;
-		font-size: 15px;
+		font-size: 16px;
+	}
+
+	.trust__desc {
+		margin: 0;
+		color: rgba(255, 255, 255, 0.8);
+		font-size: 14px;
+		line-height: 1.5;
 	}
 
 	@media (max-width: 900px) {
