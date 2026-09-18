@@ -61,31 +61,70 @@ const services = [
 		title: "Cuidado de enfermería y cuidadoras 24 horas",
 		description:
 			"Acompañamiento por profesionales con experiencia las 24 horas. Monitoreamos tu evolución y te brindamos atención continua para una recuperación segura y con tranquilidad.",
-		image: "https://loremflickr.com/480/360/nurse,patient?lock=102",
+		image: `${base}/images/servicios/enfermeria.jpg`,
 	},
 	{
 		title: "Nutrición especializada",
 		description:
 			"Alimentación pensada para tu recuperación. Ofrecemos menús balanceados y personalizados según tus necesidades nutricionales para favorecer una adecuada cicatrización y bienestar.",
-		image: "https://loremflickr.com/480/360/healthy,food?lock=103",
+		image: `${base}/images/servicios/nutricion.jpg`,
 	},
 	{
 		title: "Limpieza y lavandería",
 		description:
 			"Comodidad en cada detalle. Nos encargamos de la limpieza y desinfección de tu habitación y del lavado de tus prendas para un ambiente adecuado en tu postoperatorio.",
-		image: "https://loremflickr.com/480/360/washing,machine?lock=104",
+		image: `${base}/images/servicios/lavanderia.jpg`,
 	},
 	{
 		title: "Transporte",
 		description:
 			"Traslados seguros a tus citas médicas. Te acompañamos a controles, valoraciones y demás citas relacionadas con tu procedimiento, garantizando comodidad y puntualidad durante tu recuperación.",
-		image: "https://loremflickr.com/480/360/ambulance?lock=105",
+		image: `${base}/images/servicios/transporte.jpg`,
 	},
 	{
 		title: "Guía en el cuidado postoperatorio",
 		description:
 			"Te brindamos orientación en cada etapa de tu proceso quirúrgico, desde el uso de fajas y prendas adecuadas hasta tus controles, cuidados y recomendaciones, para que tengas una recuperación exitosa.",
-		image: "https://loremflickr.com/480/360/doctor,consultation?lock=106",
+		image: `${base}/images/servicios/guia.jpg`,
+	},
+];
+
+const complementaryServices = [
+	{
+		title: "Masajes postquirúrgicos",
+		description: "Ayudan a reducir la inflamación y favorecen la recuperación.",
+	},
+	{
+		title: "Sueroterapia",
+		description:
+			"Terapias intravenosas que ayudan en el manejo del dolor, la cicatrización, el aumento de los niveles de hemoglobina y el control de los síntomas postoperatorios.",
+	},
+	{
+		title: "Bomba del dolor",
+		description: "Control continuo del dolor durante el postoperatorio.",
+	},
+	{
+		title: "Cámara hiperbárica",
+		description: "Favorece la cicatrización y acelera la recuperación postoperatoria.",
+	},
+	{
+		title: "Almacén Bellas",
+		description:
+			"Encuentra todo lo que necesitas para tu cuidado postoperatorio en un solo lugar como fajas, cojines, e insumos especializados.",
+	},
+	{
+		title: "Spa Bellas y tratamientos faciales",
+		description:
+			"Procedimientos especializados para el cuidado, rejuvenecimiento y bienestar integral de tu piel.",
+	},
+	{
+		title: "Turismo",
+		description: "Descubre Medellín, su cultura y sus alrededores. (Guatapé, Comuna 13, Provenza…)",
+	},
+	{
+		title: "Enfermería a domicilio en Medellín y su Área Metropolitana",
+		description:
+			"Ofrecemos enfermería a domicilio como una alternativa para quienes deciden recuperarse en casa. Somos tu acompañante el día de tu cirugía y durante tu recuperación, brindándote el cuidado y apoyo profesional que necesitas.",
 	},
 ];
 ---
@@ -321,9 +360,7 @@ const services = [
 											<img src={src} alt={service.title} loading="lazy" />
 										))}
 									</div>
-									<div class="service-card__overlay" aria-hidden="true">
-										<span class="service-card__read-more">Leer más</span>
-									</div>
+									<div class="service-card__overlay" aria-hidden="true"></div>
 									<button class="gallery__nav gallery__nav--prev" aria-label="Foto anterior" type="button">
 										&#8249;
 									</button>
@@ -339,12 +376,25 @@ const services = [
 							) : (
 								<div class="service-card__media">
 									<img src={service.image} alt={service.title} loading="lazy" />
-									<div class="service-card__overlay" aria-hidden="true">
-										<span class="service-card__read-more">Leer más</span>
-									</div>
+									<div class="service-card__overlay" aria-hidden="true"></div>
 								</div>
 							)}
 							<p class="service-card__desc">{service.description}</p>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="complementary">
+			<div class="complementary__container">
+				<h2 class="complementary__title">Servicios Complementarios</h2>
+
+				<div class="complementary__grid">
+					{complementaryServices.map((item) => (
+						<article class="complementary-card">
+							<h3 class="complementary-card__title">{item.title}</h3>
+							<p class="complementary-card__desc">{item.description}</p>
 						</article>
 					))}
 				</div>
@@ -780,9 +830,6 @@ const services = [
 	.service-card__overlay {
 		position: absolute;
 		inset: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		background: rgba(20, 166, 158, 0.75);
 		opacity: 0;
 		transition: opacity 0.25s ease;
@@ -869,17 +916,6 @@ const services = [
 		background: white;
 	}
 
-	.service-card__read-more {
-		padding: 10px 22px;
-		border: 1.5px solid rgba(255, 255, 255, 0.7);
-		color: white;
-		font-family: "Poppins", "Segoe UI", sans-serif;
-		font-size: 13px;
-		font-weight: 600;
-		letter-spacing: 1.5px;
-		text-transform: uppercase;
-	}
-
 	.service-card__desc {
 		margin: 0;
 		color: #7c8892;
@@ -895,6 +931,72 @@ const services = [
 
 	@media (max-width: 600px) {
 		.services__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.complementary {
+		background: white;
+		padding: 96px 0;
+	}
+
+	.complementary__container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 32px;
+	}
+
+	.complementary__title {
+		margin: 0 0 40px;
+		color: #17212b;
+		font-family: "Poppins", "Segoe UI", sans-serif;
+		font-size: 36px;
+		font-weight: 800;
+	}
+
+	.complementary__grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 28px;
+	}
+
+	.complementary-card {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		background: white;
+		border: 1px solid #e7edec;
+		border-bottom: 4px solid #14a69e;
+		border-radius: 12px;
+		padding: 24px;
+		box-shadow: 0 16px 32px rgba(23, 33, 43, 0.06);
+		text-align: center;
+	}
+
+	.complementary-card__title {
+		margin: 0;
+		color: #17212b;
+		font-family: "Poppins", "Segoe UI", sans-serif;
+		font-size: 17px;
+		font-weight: 700;
+		line-height: 1.3;
+	}
+
+	.complementary-card__desc {
+		margin: 0;
+		color: #7c8892;
+		font-size: 14px;
+		line-height: 1.6;
+	}
+
+	@media (max-width: 900px) {
+		.complementary__grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 520px) {
+		.complementary__grid {
 			grid-template-columns: 1fr;
 		}
 	}
