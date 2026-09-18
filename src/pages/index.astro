@@ -47,7 +47,15 @@ const services = [
 		title: "Hospedaje especializado",
 		description:
 			"Instalaciones adaptadas para el cuidado postoperatorio, diseñadas para brindarte la comodidad, seguridad y tranquilidad que necesitas durante tu recuperación.",
-		image: "https://loremflickr.com/480/360/hospital,room?lock=101",
+		images: [
+			`${base}/images/hospedaje/hospedaje-1.jpg`,
+			`${base}/images/hospedaje/hospedaje-2.jpg`,
+			`${base}/images/hospedaje/hospedaje-3.jpg`,
+			`${base}/images/hospedaje/hospedaje-4.jpg`,
+			`${base}/images/hospedaje/hospedaje-5.jpg`,
+			`${base}/images/hospedaje/hospedaje-6.jpg`,
+			`${base}/images/hospedaje/hospedaje-7.jpg`,
+		],
 	},
 	{
 		title: "Cuidado de enfermería y cuidadoras 24 horas",
@@ -306,12 +314,36 @@ const services = [
 					{services.map((service) => (
 						<article class="service-card">
 							<h3 class="service-card__title">{service.title}</h3>
-							<div class="service-card__media">
-								<img src={service.image} alt={service.title} loading="lazy" />
-								<div class="service-card__overlay" aria-hidden="true">
-									<span class="service-card__read-more">Leer más</span>
+							{service.images ? (
+								<div class="service-card__media service-card__media--gallery" data-gallery>
+									<div class="gallery__track">
+										{service.images.map((src) => (
+											<img src={src} alt={service.title} loading="lazy" />
+										))}
+									</div>
+									<div class="service-card__overlay" aria-hidden="true">
+										<span class="service-card__read-more">Leer más</span>
+									</div>
+									<button class="gallery__nav gallery__nav--prev" aria-label="Foto anterior" type="button">
+										&#8249;
+									</button>
+									<button class="gallery__nav gallery__nav--next" aria-label="Foto siguiente" type="button">
+										&#8250;
+									</button>
+									<div class="gallery__dots">
+										{service.images.map((_, i) => (
+											<span class={`gallery__dot ${i === 0 ? "is-active" : ""}`} data-index={i}></span>
+										))}
+									</div>
 								</div>
-							</div>
+							) : (
+								<div class="service-card__media">
+									<img src={service.image} alt={service.title} loading="lazy" />
+									<div class="service-card__overlay" aria-hidden="true">
+										<span class="service-card__read-more">Leer más</span>
+									</div>
+								</div>
+							)}
 							<p class="service-card__desc">{service.description}</p>
 						</article>
 					))}
@@ -343,6 +375,35 @@ const services = [
 			});
 
 			dialog.addEventListener("close", () => video.pause());
+		</script>
+
+		<script>
+			document.querySelectorAll<HTMLElement>("[data-gallery]").forEach((gallery) => {
+				const track = gallery.querySelector<HTMLElement>(".gallery__track");
+				const dots = Array.from(gallery.querySelectorAll<HTMLElement>(".gallery__dot"));
+				const prevButton = gallery.querySelector<HTMLButtonElement>(".gallery__nav--prev");
+				const nextButton = gallery.querySelector<HTMLButtonElement>(".gallery__nav--next");
+				if (!track) return;
+
+				function goTo(index: number) {
+					if (!track) return;
+					const clamped = Math.max(0, Math.min(index, dots.length - 1));
+					track.scrollTo({ left: track.clientWidth * clamped, behavior: "smooth" });
+				}
+
+				function currentIndex() {
+					if (!track) return 0;
+					return Math.round(track.scrollLeft / track.clientWidth);
+				}
+
+				prevButton?.addEventListener("click", () => goTo(currentIndex() - 1));
+				nextButton?.addEventListener("click", () => goTo(currentIndex() + 1));
+
+				track.addEventListener("scroll", () => {
+					const active = currentIndex();
+					dots.forEach((dot, i) => dot.classList.toggle("is-active", i === active));
+				});
+			});
 		</script>
 	</body>
 </html>
@@ -725,11 +786,87 @@ const services = [
 		background: rgba(20, 166, 158, 0.75);
 		opacity: 0;
 		transition: opacity 0.25s ease;
+		pointer-events: none;
+		z-index: 1;
 	}
 
 	.service-card:hover .service-card__overlay,
 	.service-card:focus-within .service-card__overlay {
 		opacity: 1;
+	}
+
+	.service-card__media--gallery .gallery__track {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.service-card__media--gallery .gallery__track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.service-card__media--gallery .gallery__track img {
+		flex: 0 0 100%;
+		scroll-snap-align: start;
+	}
+
+	.gallery__nav {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 2;
+		width: 32px;
+		height: 32px;
+		border: none;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.9);
+		color: #17212b;
+		font-size: 18px;
+		line-height: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+	}
+
+	.service-card__media--gallery:hover .gallery__nav {
+		opacity: 1;
+	}
+
+	.gallery__nav--prev {
+		left: 8px;
+	}
+
+	.gallery__nav--next {
+		right: 8px;
+	}
+
+	.gallery__dots {
+		position: absolute;
+		bottom: 10px;
+		left: 0;
+		right: 0;
+		z-index: 2;
+		display: flex;
+		justify-content: center;
+		gap: 6px;
+	}
+
+	.gallery__dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.55);
+		transition: background 0.2s ease;
+	}
+
+	.gallery__dot.is-active {
+		background: white;
 	}
 
 	.service-card__read-more {
