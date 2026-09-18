@@ -145,6 +145,34 @@ const instagramPosts = [
 	"https://www.instagram.com/p/DDLO8W9xe_N/",
 	"https://www.instagram.com/p/DT32T4zjnv9/",
 ];
+
+const siteUrl = new URL(`${base}/`, Astro.site).toString();
+const ogImage = new URL(`${base}/images/og-cover.jpg`, Astro.site).toString();
+const pageTitle = "Bellas Te Cuida | Casa de Recuperación Postoperatoria en Medellín";
+const pageDescription =
+	"Recovery House en Medellín especializada en cuidado postoperatorio de cirugía plástica, estética y reconstructiva. Hospedaje, enfermería 24h, nutrición, transporte y acompañamiento integral. Más de 10 años de experiencia.";
+
+const businessSchema = {
+	"@context": "https://schema.org",
+	"@type": ["MedicalBusiness", "LodgingBusiness"],
+	name: "Bellas Te Cuida - Casa de Recuperación",
+	description: pageDescription,
+	image: ogImage,
+	url: siteUrl,
+	telephone: "+573023287951",
+	priceRange: "$$",
+	address: {
+		"@type": "PostalAddress",
+		addressLocality: "Medellín",
+		addressRegion: "Antioquia",
+		addressCountry: "CO",
+	},
+	areaServed: {
+		"@type": "City",
+		name: "Medellín",
+	},
+	sameAs: ["https://www.instagram.com/bellastecuida/", "https://www.tiktok.com/@bellastecuida"],
+};
 ---
 
 <html lang="es">
@@ -153,7 +181,29 @@ const instagramPosts = [
 		<link rel="icon" type="image/png" href={`${base}/favicon.png`} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Webbellas</title>
+
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href={siteUrl} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Bellas Te Cuida" />
+		<meta property="og:locale" content="es_CO" />
+		<meta property="og:url" content={siteUrl} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -169,10 +219,10 @@ const instagramPosts = [
 			<div class="about__container">
 				<div class="about__content">
 					<img class="about__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación" />
-					<h2 class="about__title">
+					<h1 class="about__title">
 						Casa de Recuperación<br />
 						Bellas Te Cuida en Medellín
-					</h2>
+					</h1>
 					<p class="about__subtitle">Recovery House</p>
 					<p class="about__lead">
 						El cuidado postoperatorio que necesitas, con la calidad humana que mereces. En
