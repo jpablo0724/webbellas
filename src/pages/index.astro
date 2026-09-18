@@ -137,6 +137,7 @@ const complementaryServices = [
 ];
 
 const wellbeingImage = `${base}/images/bienestar.jpg`;
+const logo = `${base}/images/logo.png`;
 
 const instagramPosts = [
 	"https://www.instagram.com/p/DPckQ0XjKQR/",
@@ -149,8 +150,7 @@ const instagramPosts = [
 <html lang="es">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
-		<link rel="icon" href={`${base}/favicon.ico`} />
+		<link rel="icon" type="image/png" href={`${base}/favicon.png`} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Webbellas</title>
@@ -162,6 +162,12 @@ const instagramPosts = [
 		/>
 	</head>
 	<body>
+		<header class="site-header">
+			<div class="site-header__container">
+				<img class="site-header__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación" />
+			</div>
+		</header>
+
 		<section class="about">
 			<div class="about__blob"></div>
 			<div class="about__ring"></div>
@@ -438,17 +444,16 @@ const instagramPosts = [
 
 				<div class="testimonials__grid">
 					{instagramPosts.map((url) => (
-						<div class="testimonials__post">
-							<blockquote
-								class="instagram-media"
-								data-instgrm-permalink={url}
-								data-instgrm-version="14"
-							>
-								<a href={url} target="_blank" rel="noopener noreferrer">
-									Ver publicación en Instagram
-								</a>
-							</blockquote>
-						</div>
+						<a class="testimonials__post" href={url} target="_blank" rel="noopener noreferrer">
+							<div class="testimonials__frame">
+								<blockquote
+									class="instagram-media"
+									data-instgrm-permalink={url}
+									data-instgrm-version="14"
+								>
+								</blockquote>
+							</div>
+						</a>
 					))}
 				</div>
 			</div>
@@ -456,6 +461,7 @@ const instagramPosts = [
 
 		<footer class="site-footer">
 			<div class="site-footer__container">
+				<img class="site-footer__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación" />
 				<p class="site-footer__tagline">En Bellas te cuidamos por dentro y por fuera.</p>
 
 				<a class="site-footer__contact" href="tel:+573023287951">302 328 7951</a>
@@ -574,6 +580,32 @@ const instagramPosts = [
 	:global(body) {
 		margin: 0;
 		color: #3a4750;
+		overflow-x: hidden;
+	}
+
+	:global(h1),
+	:global(h2),
+	:global(h3) {
+		overflow-wrap: break-word;
+	}
+
+	.site-header {
+		background: white;
+		box-shadow: 0 2px 12px rgba(23, 33, 43, 0.08);
+		position: relative;
+		z-index: 10;
+	}
+
+	.site-header__container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 16px 32px;
+	}
+
+	.site-header__logo {
+		height: 56px;
+		width: auto;
+		display: block;
 	}
 
 	.about {
@@ -747,6 +779,7 @@ const instagramPosts = [
 		.about__columns,
 		.about__checklist {
 			grid-template-columns: 1fr;
+			row-gap: 16px;
 		}
 
 		.about__media {
@@ -881,6 +914,7 @@ const instagramPosts = [
 		font-size: 36px;
 		font-weight: 800;
 		text-align: center;
+		overflow-wrap: break-word;
 	}
 
 	.services__grid {
@@ -893,6 +927,7 @@ const instagramPosts = [
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
+		min-width: 0;
 		background: white;
 		border-radius: 12px;
 		border-bottom: 4px solid #14a69e;
@@ -913,6 +948,7 @@ const instagramPosts = [
 	.service-card__media {
 		position: relative;
 		aspect-ratio: 4 / 3;
+		min-width: 0;
 		border-radius: 8px;
 		overflow: hidden;
 	}
@@ -945,6 +981,7 @@ const instagramPosts = [
 
 	.service-card__media--gallery .gallery__track img {
 		flex: 0 0 100%;
+		min-width: 0;
 		scroll-snap-align: start;
 	}
 
@@ -1041,6 +1078,7 @@ const instagramPosts = [
 		font-size: 36px;
 		font-weight: 800;
 		text-align: center;
+		overflow-wrap: break-word;
 	}
 
 	.complementary__grid {
@@ -1176,6 +1214,7 @@ const instagramPosts = [
 		font-size: 36px;
 		font-weight: 800;
 		text-align: center;
+		overflow-wrap: break-word;
 	}
 
 	.testimonials__grid {
@@ -1185,16 +1224,32 @@ const instagramPosts = [
 	}
 
 	.testimonials__post {
-		display: flex;
-		justify-content: center;
+		display: block;
 		background: white;
 		border-radius: 12px;
 		overflow: hidden;
 		box-shadow: 0 16px 32px rgba(23, 33, 43, 0.08);
+		text-decoration: none;
+		transition: transform 0.25s ease;
 	}
 
-	.testimonials__post :global(iframe) {
+	.testimonials__post:hover {
+		transform: translateY(-4px);
+	}
+
+	.testimonials__frame {
+		position: relative;
+		aspect-ratio: 5 / 6;
+		overflow: hidden;
+		background: #111;
+	}
+
+	.testimonials__frame :global(iframe) {
+		position: absolute;
+		top: -78px;
+		left: 0;
 		width: 100% !important;
+		pointer-events: none;
 	}
 
 	@media (max-width: 1300px) {
@@ -1223,6 +1278,14 @@ const instagramPosts = [
 		align-items: center;
 		gap: 16px;
 		text-align: center;
+	}
+
+	.site-footer__logo {
+		width: 120px;
+		height: auto;
+		background: white;
+		border-radius: 12px;
+		padding: 8px 14px;
 	}
 
 	.site-footer__tagline {
@@ -1266,5 +1329,13 @@ const instagramPosts = [
 	.site-footer__icon:hover {
 		background: rgba(255, 255, 255, 0.3);
 		transform: translateY(-2px);
+	}
+
+	@media (max-width: 480px) {
+		.services__title,
+		.complementary__title,
+		.testimonials__title {
+			font-size: 24px;
+		}
 	}
 </style>
