@@ -93,36 +93,44 @@ const complementaryServices = [
 	{
 		title: "Masajes postquirúrgicos",
 		description: "Ayudan a reducir la inflamación y favorecen la recuperación.",
+		image: `${base}/images/complementarios/masajes.jpg`,
 	},
 	{
 		title: "Sueroterapia",
 		description:
 			"Terapias intravenosas que ayudan en el manejo del dolor, la cicatrización, el aumento de los niveles de hemoglobina y el control de los síntomas postoperatorios.",
+		image: `${base}/images/complementarios/sueroterapia.jpg`,
 	},
 	{
 		title: "Bomba del dolor",
 		description: "Control continuo del dolor durante el postoperatorio.",
+		image: `${base}/images/complementarios/bomba-dolor.jpg`,
 	},
 	{
 		title: "Cámara hiperbárica",
 		description: "Favorece la cicatrización y acelera la recuperación postoperatoria.",
+		image: `${base}/images/complementarios/camara-hiperbarica.jpg`,
 	},
 	{
 		title: "Almacén Bellas",
 		description:
 			"Encuentra todo lo que necesitas para tu cuidado postoperatorio en un solo lugar como fajas, cojines, e insumos especializados.",
+		image: `${base}/images/complementarios/almacen-bellas.jpg`,
 	},
 	{
 		title: "Spa Bellas y tratamientos faciales",
 		description:
 			"Procedimientos especializados para el cuidado, rejuvenecimiento y bienestar integral de tu piel.",
+		image: null,
 	},
 	{
 		title: "Turismo",
 		description: "Descubre Medellín, su cultura y sus alrededores. (Guatapé, Comuna 13, Provenza…)",
+		image: `${base}/images/complementarios/turismo.jpg`,
 	},
 	{
 		title: "Enfermería a domicilio en Medellín y su Área Metropolitana",
+		image: `${base}/images/complementarios/enfermeria-domicilio.jpg`,
 		description:
 			"Ofrecemos enfermería a domicilio como una alternativa para quienes deciden recuperarse en casa. Somos tu acompañante el día de tu cirugía y durante tu recuperación, brindándote el cuidado y apoyo profesional que necesitas.",
 	},
@@ -393,6 +401,11 @@ const complementaryServices = [
 				<div class="complementary__grid">
 					{complementaryServices.map((item) => (
 						<article class="complementary-card">
+							{item.image && (
+								<div class="complementary-card__media">
+									<img src={item.image} alt={item.title} loading="lazy" />
+								</div>
+							)}
 							<h3 class="complementary-card__title">{item.title}</h3>
 							<p class="complementary-card__desc">{item.description}</p>
 						</article>
@@ -952,6 +965,7 @@ const complementaryServices = [
 		font-family: "Poppins", "Segoe UI", sans-serif;
 		font-size: 36px;
 		font-weight: 800;
+		text-align: center;
 	}
 
 	.complementary__grid {
@@ -963,18 +977,35 @@ const complementaryServices = [
 	.complementary-card {
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
 		background: white;
 		border: 1px solid #e7edec;
 		border-bottom: 4px solid #14a69e;
 		border-radius: 12px;
-		padding: 24px;
+		overflow: hidden;
 		box-shadow: 0 16px 32px rgba(23, 33, 43, 0.06);
 		text-align: center;
 	}
 
+	.complementary-card__media {
+		position: relative;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+	}
+
+	.complementary-card__media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.35s ease;
+	}
+
+	.complementary-card:hover .complementary-card__media img {
+		transform: scale(1.06);
+	}
+
 	.complementary-card__title {
-		margin: 0;
+		margin: 20px 20px 0;
 		color: #17212b;
 		font-family: "Poppins", "Segoe UI", sans-serif;
 		font-size: 17px;
@@ -983,7 +1014,7 @@ const complementaryServices = [
 	}
 
 	.complementary-card__desc {
-		margin: 0;
+		margin: 10px 20px 24px;
 		color: #7c8892;
 		font-size: 14px;
 		line-height: 1.6;
