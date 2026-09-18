@@ -135,6 +135,8 @@ const complementaryServices = [
 			"Ofrecemos enfermería a domicilio como una alternativa para quienes deciden recuperarse en casa. Somos tu acompañante el día de tu cirugía y durante tu recuperación, brindándote el cuidado y apoyo profesional que necesitas.",
 	},
 ];
+
+const wellbeingImage = `${base}/images/bienestar.jpg`;
 ---
 
 <html lang="es">
@@ -408,6 +410,24 @@ const complementaryServices = [
 							<p class="complementary-card__desc">{item.description}</p>
 						</article>
 					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="wellbeing">
+			<div class="wellbeing__container">
+				<div class="wellbeing__media">
+					<img src={wellbeingImage} alt="Porque tu bienestar es nuestra prioridad" loading="lazy" />
+				</div>
+				<div class="wellbeing__content">
+					<h2 class="wellbeing__title">Porque tu bienestar es nuestra prioridad</h2>
+					<p class="wellbeing__desc">
+						Te cuidamos por dentro y por fuera. En Bellas Te Cuida creemos que una
+						recuperación exitosa comienza con un cuidado postoperatorio de excelencia y un
+						acompañamiento profundamente humano. Por eso velamos por tu bienestar físico y
+						emocional en cada etapa del proceso, para que vivas una recuperación segura y
+						regreses a casa con la tranquilidad de haber recibido el cuidado que mereces.
+					</p>
 				</div>
 			</div>
 		</section>
@@ -1018,6 +1038,56 @@ const complementaryServices = [
 
 	@media (max-width: 520px) {
 		.complementary__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.wellbeing {
+		background: #63a19c;
+		padding: 96px 0;
+	}
+
+	.wellbeing__container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 32px;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 64px;
+		align-items: center;
+	}
+
+	.wellbeing__media {
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 24px 48px rgba(23, 33, 43, 0.2);
+	}
+
+	.wellbeing__media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.wellbeing__title {
+		margin: 0 0 24px;
+		color: white;
+		font-family: "Poppins", "Segoe UI", sans-serif;
+		font-size: 38px;
+		font-weight: 800;
+		line-height: 1.25;
+	}
+
+	.wellbeing__desc {
+		margin: 0;
+		color: rgba(255, 255, 255, 0.9);
+		font-size: 16px;
+		line-height: 1.75;
+	}
+
+	@media (max-width: 900px) {
+		.wellbeing__container {
 			grid-template-columns: 1fr;
 		}
 	}
