@@ -162,18 +162,13 @@ const instagramPosts = [
 		/>
 	</head>
 	<body>
-		<header class="site-header">
-			<div class="site-header__container">
-				<img class="site-header__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación" />
-			</div>
-		</header>
-
 		<section class="about">
 			<div class="about__blob"></div>
 			<div class="about__ring"></div>
 
 			<div class="about__container">
 				<div class="about__content">
+					<img class="about__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación" />
 					<h2 class="about__title">
 						Casa de Recuperación<br />
 						Bellas Te Cuida en Medellín
@@ -444,7 +439,7 @@ const instagramPosts = [
 
 				<div class="testimonials__grid">
 					{instagramPosts.map((url) => (
-						<a class="testimonials__post" href={url} target="_blank" rel="noopener noreferrer">
+						<div class="testimonials__post">
 							<div class="testimonials__frame">
 								<blockquote
 									class="instagram-media"
@@ -453,7 +448,7 @@ const instagramPosts = [
 								>
 								</blockquote>
 							</div>
-						</a>
+						</div>
 					))}
 				</div>
 			</div>
@@ -589,23 +584,11 @@ const instagramPosts = [
 		overflow-wrap: break-word;
 	}
 
-	.site-header {
-		background: white;
-		box-shadow: 0 2px 12px rgba(23, 33, 43, 0.08);
-		position: relative;
-		z-index: 10;
-	}
-
-	.site-header__container {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 16px 32px;
-	}
-
-	.site-header__logo {
-		height: 56px;
+	.about__logo {
+		height: 64px;
 		width: auto;
 		display: block;
+		margin-bottom: 28px;
 	}
 
 	.about {
@@ -1249,7 +1232,6 @@ const instagramPosts = [
 		top: -78px;
 		left: 0;
 		width: 100% !important;
-		pointer-events: none;
 	}
 
 	@media (max-width: 1300px) {
