@@ -138,6 +138,7 @@ const complementaryServices = [
 
 const wellbeingImage = `${base}/images/bienestar.jpg`;
 const logo = `${base}/images/logo.png`;
+const aboutBg = `${base}/images/about-bg.png`;
 
 const instagramPosts = [
 	"https://www.instagram.com/p/DPckQ0XjKQR/",
@@ -212,7 +213,7 @@ const businessSchema = {
 		/>
 	</head>
 	<body>
-		<section class="about">
+		<section class="about" style={`background-image: url(${aboutBg});`}>
 			<div class="about__blob"></div>
 			<div class="about__ring"></div>
 
@@ -645,6 +646,9 @@ const businessSchema = {
 		position: relative;
 		overflow: hidden;
 		background: #eef2f2;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 		padding: 96px 0;
 	}
 
@@ -682,7 +686,7 @@ const businessSchema = {
 
 	.about__title {
 		margin: 0 0 24px;
-		color: #17212b;
+		color: #d9488b;
 		font-family: "Poppins", "Segoe UI", sans-serif;
 		font-size: 42px;
 		line-height: 1.2;
