@@ -62,6 +62,7 @@ const services = [
 		description:
 			"Acompañamiento por profesionales con experiencia las 24 horas. Monitoreamos tu evolución y te brindamos atención continua para una recuperación segura y con tranquilidad.",
 		image: `${base}/images/servicios/enfermeria.jpg`,
+		imagePosition: "50% 20%",
 	},
 	{
 		title: "Nutrición especializada",
@@ -73,7 +74,8 @@ const services = [
 		title: "Limpieza y lavandería",
 		description:
 			"Comodidad en cada detalle. Nos encargamos de la limpieza y desinfección de tu habitación y del lavado de tus prendas para un ambiente adecuado en tu postoperatorio.",
-		image: `${base}/images/servicios/lavanderia.jpg`,
+		image: `${base}/images/servicios/lavanderia.png`,
+		imagePosition: "50% 15%",
 	},
 	{
 		title: "Transporte",
@@ -436,7 +438,12 @@ const businessSchema = {
 								</div>
 							) : (
 								<div class="service-card__media">
-									<img src={service.image} alt={service.title} loading="lazy" />
+									<img
+										src={service.image}
+										alt={service.title}
+										loading="lazy"
+										style={service.imagePosition ? `object-position: ${service.imagePosition};` : undefined}
+									/>
 								</div>
 							)}
 							<p class="service-card__desc">{service.description}</p>
