@@ -213,7 +213,7 @@ const businessSchema = {
 		/>
 	</head>
 	<body>
-		<section class="about" style={`background-image: url(${aboutBg});`}>
+		<section class="about">
 			<div class="about__blob"></div>
 			<div class="about__ring"></div>
 
@@ -281,18 +281,21 @@ const businessSchema = {
 				</div>
 
 				<div class="about__media">
-					<div class="about__video-frame">
-						<img
-							src={`${base}/images/portada-video.jpg`}
-							alt="Cuidado Postoperatorio en Medellín"
-							width="800"
-							height="1422"
-						/>
-						<button id="about-play" class="about__play" aria-label="Reproducir video" type="button">
-							<svg viewBox="0 0 24 24" width="20" height="20">
-								<path d="M8 5v14l11-7z" fill="white"></path>
-							</svg>
-						</button>
+					<div class="about__media-inner">
+						<div class="about__video-frame">
+							<img
+								src={`${base}/images/portada-video.jpg`}
+								alt="Cuidado Postoperatorio en Medellín"
+								width="800"
+								height="1422"
+							/>
+							<button id="about-play" class="about__play" aria-label="Reproducir video" type="button">
+								<svg viewBox="0 0 24 24" width="20" height="20">
+									<path d="M8 5v14l11-7z" fill="white"></path>
+								</svg>
+							</button>
+						</div>
+						<img class="about__decor" src={aboutBg} alt="" aria-hidden="true" loading="lazy" />
 					</div>
 				</div>
 			</div>
@@ -646,9 +649,6 @@ const businessSchema = {
 		position: relative;
 		overflow: hidden;
 		background: #eef2f2;
-		background-size: 45% auto;
-		background-position: bottom right;
-		background-repeat: no-repeat;
 		padding: 96px 0;
 	}
 
@@ -765,13 +765,29 @@ const businessSchema = {
 		justify-content: center;
 	}
 
+	.about__media-inner {
+		position: relative;
+		height: 100%;
+	}
+
 	.about__video-frame {
 		position: relative;
+		z-index: 1;
 		height: 100%;
 		aspect-ratio: 9 / 16;
 		border-radius: 16px;
 		overflow: hidden;
 		box-shadow: 0 24px 48px rgba(23, 33, 43, 0.18);
+	}
+
+	.about__decor {
+		position: absolute;
+		right: -150px;
+		bottom: -70px;
+		width: 340px;
+		max-width: none;
+		pointer-events: none;
+		z-index: 0;
 	}
 
 	.about__video-frame img {
@@ -810,6 +826,12 @@ const businessSchema = {
 		.about__media {
 			height: 420px;
 		}
+
+		.about__decor {
+			width: 260px;
+			right: -100px;
+			bottom: -50px;
+		}
 	}
 
 	@media (max-width: 520px) {
@@ -821,6 +843,12 @@ const businessSchema = {
 
 		.about__media {
 			height: 340px;
+		}
+
+		.about__decor {
+			width: 200px;
+			right: -60px;
+			bottom: -30px;
 		}
 	}
 
