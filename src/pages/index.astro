@@ -540,7 +540,7 @@ const businessSchema = {
 				<img class="site-footer__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación" />
 				<p class="site-footer__tagline">En Bellas te cuidamos por dentro y por fuera.</p>
 
-				<a class="site-footer__contact" href="tel:+573023287951">302 328 7951</a>
+				<a class="site-footer__contact" href="tel:+573023287951">+57 302 328 7951</a>
 
 				<div class="site-footer__social">
 					<a
@@ -550,7 +550,7 @@ const businessSchema = {
 						rel="noopener noreferrer"
 						aria-label="Escribir por WhatsApp"
 					>
-						<svg viewBox="0 0 32 32" width="22" height="22" fill="white">
+						<svg viewBox="0 0 32 32" width="34" height="34" fill="currentColor">
 							<path
 								d="M16 3C9.1 3 3.5 8.6 3.5 15.5c0 2.5.7 4.8 2 6.8L3 29l6.9-2.4c1.9 1.1 4.1 1.7 6.1 1.7 6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3Zm0 22.7c-2 0-3.9-.5-5.6-1.6l-.4-.2-4.1 1.4 1.4-4-.3-.4a10.2 10.2 0 0 1-1.6-5.4C5.4 9.7 10.1 5 16 5s10.6 4.7 10.6 10.5S21.9 25.7 16 25.7Z"
 							></path>
@@ -566,10 +566,10 @@ const businessSchema = {
 						rel="noopener noreferrer"
 						aria-label="Ir a Instagram"
 					>
-						<svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-							<rect x="3" y="3" width="18" height="18" rx="5" stroke="white" stroke-width="1.8"></rect>
-							<circle cx="12" cy="12" r="4.2" stroke="white" stroke-width="1.8"></circle>
-							<circle cx="17.3" cy="6.7" r="1.1" fill="white"></circle>
+						<svg viewBox="0 0 24 24" width="32" height="32" fill="none">
+							<rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"></rect>
+							<circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle>
+							<circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"></circle>
 						</svg>
 					</a>
 					<a
@@ -579,7 +579,7 @@ const businessSchema = {
 						rel="noopener noreferrer"
 						aria-label="Ir a TikTok"
 					>
-						<svg viewBox="0 0 32 32" width="20" height="20" fill="white">
+						<svg viewBox="0 0 32 32" width="36" height="36" fill="currentColor">
 							<path
 								d="M22.5 9.6a6 6 0 0 1-3.6-1.2v9.2a6.9 6.9 0 1 1-6.9-6.9c.3 0 .6 0 .9.1v3.1a3.8 3.8 0 1 0 2.7 3.7V3h3a6 6 0 0 0 3.9 5.6v1Z"
 							></path>
@@ -588,6 +588,24 @@ const businessSchema = {
 				</div>
 			</div>
 		</footer>
+
+		<a
+			class="whatsapp-float"
+			href="https://wa.me/573023287951"
+			target="_blank"
+			rel="noopener noreferrer"
+			aria-label="Escribir por WhatsApp"
+		>
+			<svg viewBox="0 0 32 32" width="36" height="36" fill="currentColor" aria-hidden="true">
+				<path
+					d="M16 3C9.1 3 3.5 8.6 3.5 15.5c0 2.5.7 4.8 2 6.8L3 29l6.9-2.4c1.9 1.1 4.1 1.7 6.1 1.7 6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3Zm0 22.7c-2 0-3.9-.5-5.6-1.6l-.4-.2-4.1 1.4 1.4-4-.3-.4a10.2 10.2 0 0 1-1.6-5.4C5.4 9.7 10.1 5 16 5s10.6 4.7 10.6 10.5S21.9 25.7 16 25.7Z"
+				></path>
+				<path
+					d="M21.6 18.1c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.8-1-2.4-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.3 2.4 3.7 5.8 5.1.8.3 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.4.2-1.6 0-.1-.3-.2-.6-.4Z"
+				></path>
+			</svg>
+			<span class="whatsapp-float__label">¿Hablamos?</span>
+		</a>
 
 		<script async src="https://www.instagram.com/embed.js"></script>
 
@@ -1377,9 +1395,9 @@ const businessSchema = {
 	}
 
 	.site-footer__contact {
-		color: rgba(255, 255, 255, 0.9);
-		font-size: 16px;
-		font-weight: 600;
+		color: white;
+		font-size: 20px;
+		font-weight: 700;
 		text-decoration: none;
 	}
 
@@ -1389,26 +1407,110 @@ const businessSchema = {
 
 	.site-footer__social {
 		display: flex;
-		gap: 14px;
-		margin-top: 8px;
+		gap: 20px;
+		margin-top: 12px;
 	}
 
 	.site-footer__icon {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 44px;
-		height: 44px;
+		width: 60px;
+		height: 60px;
 		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.16);
+		background: white;
+		color: #45b0bd;
+		box-shadow: 0 8px 20px rgba(23, 33, 43, 0.15);
 		transition:
-			background 0.2s ease,
+			color 0.2s ease,
 			transform 0.2s ease;
 	}
 
 	.site-footer__icon:hover {
-		background: rgba(255, 255, 255, 0.3);
-		transform: translateY(-2px);
+		color: #d9488b;
+		transform: translateY(-3px);
+	}
+
+	.whatsapp-float {
+		position: fixed;
+		right: 24px;
+		bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+		z-index: 50;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 68px;
+		height: 68px;
+		border-radius: 50%;
+		background: #25d366;
+		color: white;
+		text-decoration: none;
+		box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45);
+		transition: transform 0.2s ease;
+	}
+
+	.whatsapp-float::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: 50%;
+		background: #25d366;
+		z-index: -1;
+		animation: whatsapp-pulse 2.2s ease-out infinite;
+	}
+
+	.whatsapp-float:hover {
+		transform: scale(1.08);
+	}
+
+	.whatsapp-float__label {
+		position: absolute;
+		right: calc(100% + 12px);
+		padding: 8px 14px;
+		border-radius: 999px;
+		background: white;
+		color: #17212b;
+		font-size: 14px;
+		font-weight: 600;
+		white-space: nowrap;
+		box-shadow: 0 6px 18px rgba(23, 33, 43, 0.15);
+		opacity: 0;
+		transform: translateX(6px);
+		transition:
+			opacity 0.2s ease,
+			transform 0.2s ease;
+		pointer-events: none;
+	}
+
+	.whatsapp-float:hover .whatsapp-float__label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	@keyframes whatsapp-pulse {
+		0% {
+			transform: scale(1);
+			opacity: 0.6;
+		}
+		100% {
+			transform: scale(1.6);
+			opacity: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.whatsapp-float::before {
+			animation: none;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.whatsapp-float {
+			right: 16px;
+			bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+			width: 60px;
+			height: 60px;
+		}
 	}
 
 	@media (max-width: 480px) {
