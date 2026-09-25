@@ -684,7 +684,7 @@ const businessSchema = {
 	}
 
 	.about__logo {
-		height: 64px;
+		height: 120px;
 		width: auto;
 		display: block;
 		margin-bottom: 28px;
@@ -886,11 +886,12 @@ const businessSchema = {
 		position: fixed;
 		inset: 0;
 		margin: auto;
-		width: min(900px, 92vw);
+		width: fit-content;
+		max-width: 92vw;
 		padding: 0;
 		border: none;
 		border-radius: 12px;
-		background: black;
+		background: transparent;
 		overflow: visible;
 	}
 
@@ -900,8 +901,12 @@ const businessSchema = {
 
 	.video-dialog__video {
 		display: block;
-		width: 100%;
-		max-height: 80vh;
+		width: auto;
+		height: 85vh;
+		max-width: 92vw;
+		aspect-ratio: 9 / 16;
+		object-fit: cover;
+		background: black;
 		border-radius: 12px;
 	}
 
@@ -1338,27 +1343,34 @@ const businessSchema = {
 
 	.testimonials__frame {
 		position: relative;
-		aspect-ratio: 5 / 6;
+		aspect-ratio: 9 / 16;
 		overflow: hidden;
-		background: #111;
+		background: #edfbfb;
 	}
 
+	/* Instagram pinta el reel 9:16 dentro de una caja 4:5 con franjas negras a los
+	   lados: se ensancha el iframe (16/9 × 4/5 ≈ 142%) y se centra para recortarlas. */
 	.testimonials__frame :global(iframe) {
 		position: absolute;
-		top: -78px;
-		left: 0;
-		width: 100% !important;
+		top: -54px;
+		left: -22.5%;
+		width: 145% !important;
+		max-width: none !important;
+		min-width: 0 !important;
+		margin: 0 !important;
 	}
 
-	@media (max-width: 1300px) {
+	@media (max-width: 900px) {
 		.testimonials__grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
-	@media (max-width: 700px) {
+	@media (max-width: 560px) {
 		.testimonials__grid {
 			grid-template-columns: 1fr;
+			max-width: 340px;
+			margin: 0 auto;
 		}
 	}
 
