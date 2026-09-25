@@ -1,4 +1,6 @@
 ---
+import { faqs } from "../data/faqs";
+
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const checklistLeft = [
 	"Hospedaje cómodo y adaptado para tu recuperación.",
@@ -180,6 +182,23 @@ const businessSchema = {
 	},
 	sameAs: ["https://www.instagram.com/bellastecuida/", "https://www.tiktok.com/@bellastecuida"],
 };
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((faq) => ({
+		"@type": "Question",
+		name: faq.question,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: faq.answer
+				.replace(/<li>/g, "• ")
+				.replace(/<[^>]+>/g, " ")
+				.replace(/\s+/g, " ")
+				.trim(),
+		},
+	})),
+};
 ---
 
 <html lang="es">
@@ -210,6 +229,7 @@ const businessSchema = {
 		<meta name="twitter:image" content={ogImage} />
 
 		<script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -532,6 +552,57 @@ const businessSchema = {
 						</div>
 					))}
 				</div>
+			</div>
+		</section>
+
+		<section class="faq" id="preguntas-frecuentes">
+			<div class="faq__container">
+				<h2 class="faq__title">Preguntas frecuentes sobre nuestra Recovery House en Medellín</h2>
+				<p class="faq__intro">
+					Si estás planeando una cirugía plástica, estética o reconstructiva en Medellín, es normal
+					tener preguntas sobre tu recuperación, la estancia y la organización de tu viaje. Aquí
+					respondemos las dudas más frecuentes para ayudarte a planificar tu proceso con mayor
+					tranquilidad.
+				</p>
+
+				<div class="faq__list">
+					{faqs.map((faq) => (
+						<details class="faq__item">
+							<summary class="faq__question">
+								<span>{faq.question}</span>
+								<svg class="faq__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+									<path
+										d="M6 9l6 6 6-6"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2.4"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									></path>
+								</svg>
+							</summary>
+							<div class="faq__answer" set:html={faq.answer} />
+						</details>
+					))}
+				</div>
+
+				<div class="faq__cta">
+					<p class="faq__cta-title">¿Quieres conocer nuestra Recovery House en Medellín?</p>
+					<a
+						class="faq__cta-button"
+						href="https://wa.me/573023287951"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Conoce Bellas Te Cuida y planea tu recuperación →
+					</a>
+				</div>
+
+				<p class="faq__note">
+					<strong>Nota importante:</strong> La información de este apartado es general y no sustituye
+					la valoración ni las indicaciones de tu cirujano o equipo médico. Los tiempos de
+					recuperación, estancia y viaje pueden variar según cada paciente y procedimiento.
+				</p>
 			</div>
 		</section>
 
@@ -1371,6 +1442,200 @@ const businessSchema = {
 			grid-template-columns: 1fr;
 			max-width: 340px;
 			margin: 0 auto;
+		}
+	}
+
+	.faq {
+		background: white;
+		padding: 96px 0;
+	}
+
+	.faq__container {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 0 32px;
+	}
+
+	.faq__title {
+		margin: 0 0 16px;
+		color: #d9488b;
+		font-family: "Poppins", "Segoe UI", sans-serif;
+		font-size: 36px;
+		font-weight: 800;
+		line-height: 1.2;
+		text-align: center;
+		overflow-wrap: break-word;
+	}
+
+	.faq__intro {
+		margin: 0 0 40px;
+		color: #7c8892;
+		font-size: 16px;
+		line-height: 1.7;
+		text-align: center;
+	}
+
+	.faq__list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.faq__item {
+		background: #f7fbfb;
+		border: 1px solid #e7edec;
+		border-radius: 12px;
+		transition:
+			border-color 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.faq__item[open] {
+		background: white;
+		border-color: #45b0bd;
+		box-shadow: 0 12px 28px rgba(23, 33, 43, 0.06);
+	}
+
+	.faq__question {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		padding: 20px 24px;
+		color: #17212b;
+		font-family: "Poppins", "Segoe UI", sans-serif;
+		font-size: 17px;
+		font-weight: 600;
+		line-height: 1.4;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.faq__question::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq__question:hover {
+		color: #d9488b;
+	}
+
+	.faq__question:focus-visible {
+		outline: 2px solid #45b0bd;
+		outline-offset: 2px;
+		border-radius: 12px;
+	}
+
+	.faq__arrow {
+		flex: none;
+		width: 36px;
+		height: 36px;
+		padding: 7px;
+		border-radius: 50%;
+		background: #45b0bd;
+		color: white;
+		transition: transform 0.25s ease;
+	}
+
+	.faq__item[open] .faq__arrow {
+		transform: rotate(180deg);
+	}
+
+	.faq__answer {
+		padding: 0 24px 22px;
+		color: #5b6770;
+		font-size: 15px;
+		line-height: 1.7;
+	}
+
+	.faq__answer :global(p) {
+		margin: 0 0 12px;
+	}
+
+	.faq__answer :global(ul),
+	.faq__answer :global(ol) {
+		margin: 0 0 12px;
+		padding-left: 22px;
+	}
+
+	.faq__answer :global(li) {
+		margin-bottom: 6px;
+	}
+
+	.faq__answer :global(li::marker) {
+		color: #45b0bd;
+		font-weight: 700;
+	}
+
+	.faq__answer :global(strong) {
+		color: #17212b;
+	}
+
+	.faq__answer > :global(:last-child) {
+		margin-bottom: 0;
+	}
+
+	.faq__cta {
+		margin-top: 48px;
+		padding: 36px 28px;
+		border-radius: 16px;
+		background: #edfbfb;
+		text-align: center;
+	}
+
+	.faq__cta-title {
+		margin: 0 0 20px;
+		color: #17212b;
+		font-family: "Poppins", "Segoe UI", sans-serif;
+		font-size: 22px;
+		font-weight: 700;
+	}
+
+	.faq__cta-button {
+		display: inline-block;
+		padding: 14px 28px;
+		border-radius: 999px;
+		background: #d9488b;
+		color: white;
+		font-weight: 700;
+		text-decoration: none;
+		transition:
+			background 0.2s ease,
+			transform 0.2s ease;
+	}
+
+	.faq__cta-button:hover {
+		background: #c23a7a;
+		transform: translateY(-2px);
+	}
+
+	.faq__note {
+		margin: 32px 0 0;
+		color: #7c8892;
+		font-size: 13px;
+		line-height: 1.6;
+		text-align: center;
+	}
+
+	@media (max-width: 600px) {
+		.faq {
+			padding: 64px 0;
+		}
+
+		.faq__container {
+			padding: 0 16px;
+		}
+
+		.faq__title {
+			font-size: 26px;
+		}
+
+		.faq__question {
+			padding: 16px 18px;
+			font-size: 16px;
+		}
+
+		.faq__answer {
+			padding: 0 18px 18px;
 		}
 	}
 
