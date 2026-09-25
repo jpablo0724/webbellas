@@ -183,6 +183,9 @@ const businessSchema = {
 	sameAs: ["https://www.instagram.com/bellastecuida/", "https://www.tiktok.com/@bellastecuida"],
 };
 
+const faqHalf = Math.ceil(faqs.length / 2);
+const faqColumns = [faqs.slice(0, faqHalf), faqs.slice(faqHalf)];
+
 const faqSchema = {
 	"@context": "https://schema.org",
 	"@type": "FAQPage",
@@ -565,24 +568,28 @@ const faqSchema = {
 					tranquilidad.
 				</p>
 
-				<div class="faq__list">
-					{faqs.map((faq) => (
-						<details class="faq__item">
-							<summary class="faq__question">
-								<span>{faq.question}</span>
-								<svg class="faq__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-									<path
-										d="M6 9l6 6 6-6"
-										fill="none"
-										stroke="currentColor"
-										stroke-width="2.4"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									></path>
-								</svg>
-							</summary>
-							<div class="faq__answer" set:html={faq.answer} />
-						</details>
+				<div class="faq__columns">
+					{faqColumns.map((column) => (
+						<div class="faq__list">
+							{column.map((faq) => (
+								<details class="faq__item">
+									<summary class="faq__question">
+										<span>{faq.question}</span>
+										<svg class="faq__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+											<path
+												d="M6 9l6 6 6-6"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2.4"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											></path>
+										</svg>
+									</summary>
+									<div class="faq__answer" set:html={faq.answer} />
+								</details>
+							))}
+						</div>
 					))}
 				</div>
 
@@ -1451,7 +1458,7 @@ const faqSchema = {
 	}
 
 	.faq__container {
-		max-width: 860px;
+		max-width: 1200px;
 		margin: 0 auto;
 		padding: 0 32px;
 	}
@@ -1475,10 +1482,33 @@ const faqSchema = {
 		text-align: center;
 	}
 
+	.faq__title,
+	.faq__intro,
+	.faq__cta,
+	.faq__note {
+		max-width: 860px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/* Dos listas independientes: abrir una pregunta no mueve la otra columna. */
+	.faq__columns {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px 24px;
+		align-items: start;
+	}
+
 	.faq__list {
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+	}
+
+	@media (max-width: 900px) {
+		.faq__columns {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.faq__item {
@@ -1609,7 +1639,7 @@ const faqSchema = {
 	}
 
 	.faq__note {
-		margin: 32px 0 0;
+		margin: 32px auto 0;
 		color: #7c8892;
 		font-size: 13px;
 		line-height: 1.6;
