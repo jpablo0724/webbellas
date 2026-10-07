@@ -68,7 +68,8 @@ const services = [
 			`${base}/images/servicios/leidy/cuidado-de-enfermeria.png`,
 			`${base}/images/servicios/leidy/enfermeria.png`,
 		],
-		imagePosition: "50% 20%",
+		// Encuadre por foto: las de leidy/ bajan para que se vea la paciente.
+		imagePositions: ["50% 20%", "50% 68%", "50% 45%"],
 	},
 	{
 		title: "Nutrición especializada",
@@ -451,12 +452,12 @@ const faqSchema = {
 							{service.images ? (
 								<div class="service-card__media service-card__media--gallery" data-gallery>
 									<div class="gallery__track">
-										{service.images.map((src) => (
+										{service.images.map((src, i) => (
 											<img
 												src={src}
 												alt={service.title}
 												loading="lazy"
-												style={service.imagePosition ? `object-position: ${service.imagePosition};` : undefined}
+												style={(service.imagePositions?.[i] ?? service.imagePosition) ? `object-position: ${service.imagePositions?.[i] ?? service.imagePosition};` : undefined}
 											/>
 										))}
 									</div>
