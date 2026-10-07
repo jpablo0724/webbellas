@@ -63,7 +63,11 @@ const services = [
 		title: "Cuidado de enfermería y cuidadoras 24 horas",
 		description:
 			"Acompañamiento por profesionales con experiencia las 24 horas. Monitoreamos tu evolución y te brindamos atención continua para una recuperación segura y con tranquilidad.",
-		image: `${base}/images/servicios/enfermeria.jpg`,
+		images: [
+			`${base}/images/servicios/enfermeria.jpg`,
+			`${base}/images/servicios/leidy/cuidado-de-enfermeria.png`,
+			`${base}/images/servicios/leidy/enfermeria.png`,
+		],
 		imagePosition: "50% 20%",
 	},
 	{
@@ -448,7 +452,12 @@ const faqSchema = {
 								<div class="service-card__media service-card__media--gallery" data-gallery>
 									<div class="gallery__track">
 										{service.images.map((src) => (
-											<img src={src} alt={service.title} loading="lazy" />
+											<img
+												src={src}
+												alt={service.title}
+												loading="lazy"
+												style={service.imagePosition ? `object-position: ${service.imagePosition};` : undefined}
+											/>
 										))}
 									</div>
 									<button class="gallery__nav gallery__nav--prev" aria-label="Foto anterior" type="button">
