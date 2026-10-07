@@ -583,7 +583,7 @@ const faqSchema = {
 				</p>
 
 				<div class="faq__columns">
-					{faqColumns.map((column) => (
+					{faqColumns.map((column, columnIndex) => (
 						<div class="faq__list">
 							{column.map((faq) => (
 								<details class="faq__item">
@@ -603,6 +603,14 @@ const faqSchema = {
 									<div class="faq__answer" set:html={faq.answer} />
 								</details>
 							))}
+							{/* La nota ocupa el hueco al final de la columna más corta, alineada a los cuadros. */}
+							{columnIndex === faqColumns.length - 1 && (
+								<p class="faq__note">
+									<strong>Nota importante:</strong> La información de este apartado es general y no sustituye
+									la valoración ni las indicaciones de tu cirujano o equipo médico. Los tiempos de
+									recuperación, estancia y viaje pueden variar según cada paciente y procedimiento.
+								</p>
+							)}
 						</div>
 					))}
 				</div>
@@ -618,12 +626,6 @@ const faqSchema = {
 						Conoce Bellas Te Cuida y planea tu recuperación →
 					</a>
 				</div>
-
-				<p class="faq__note">
-					<strong>Nota importante:</strong> La información de este apartado es general y no sustituye
-					la valoración ni las indicaciones de tu cirujano o equipo médico. Los tiempos de
-					recuperación, estancia y viaje pueden variar según cada paciente y procedimiento.
-				</p>
 			</div>
 		</section>
 
@@ -1500,8 +1502,7 @@ const faqSchema = {
 
 	.faq__title,
 	.faq__intro,
-	.faq__cta,
-	.faq__note {
+	.faq__cta {
 		max-width: 860px;
 		margin-left: auto;
 		margin-right: auto;
@@ -1655,11 +1656,19 @@ const faqSchema = {
 	}
 
 	.faq__note {
-		margin: 32px auto 0;
-		color: #7c8892;
-		font-size: 13px;
+		margin: 0;
+		padding: 20px 24px;
+		background: #fdf0f6;
+		border: 1px solid #f5c6dc;
+		border-left: 5px solid #d9488b;
+		border-radius: 12px;
+		color: #3a4750;
+		font-size: 15px;
 		line-height: 1.6;
-		text-align: center;
+	}
+
+	.faq__note strong {
+		color: #d9488b;
 	}
 
 	@media (max-width: 600px) {
