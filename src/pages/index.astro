@@ -75,7 +75,11 @@ const services = [
 		title: "Nutrición especializada",
 		description:
 			"Alimentación pensada para tu recuperación. Ofrecemos menús balanceados y personalizados según tus necesidades nutricionales para favorecer una adecuada cicatrización y bienestar.",
-		image: `${base}/images/servicios/nutricion.jpg`,
+		images: [
+			`${base}/images/servicios/nutricion.jpg`,
+			`${base}/images/servicios/leidy/nutricion-1.png`,
+		],
+		imagePositions: [undefined, "50% 40%"],
 	},
 	{
 		title: "Limpieza y lavandería",
@@ -772,17 +776,17 @@ const faqSchema = {
 	}
 
 	.about__logo {
-		height: 120px;
+		height: 170px;
 		width: auto;
 		display: block;
-		margin-bottom: 28px;
+		margin-bottom: 20px;
 	}
 
 	.about {
 		position: relative;
 		overflow: hidden;
 		background: #eef2f2;
-		padding: 96px 0;
+		padding: 32px 0 96px;
 		background-repeat: no-repeat;
 		background-size: 1150px auto;
 		background-position: right 0 bottom 0;
@@ -833,7 +837,7 @@ const faqSchema = {
 		margin: 0 0 20px;
 		color: #14a69e;
 		font-family: "Poppins", "Segoe UI", sans-serif;
-		font-size: 18px;
+		font-size: 30px;
 		font-weight: 600;
 	}
 
@@ -895,7 +899,9 @@ const faqSchema = {
 
 	.about__media {
 		position: relative;
-		height: 520px;
+		height: 760px;
+		align-self: start;
+		margin-top: 24px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -944,7 +950,7 @@ const faqSchema = {
 		}
 
 		.about__media {
-			height: 420px;
+			height: 500px;
 		}
 
 		.about {
@@ -961,7 +967,7 @@ const faqSchema = {
 		}
 
 		.about__media {
-			height: 340px;
+			height: 420px;
 		}
 
 		.about {
