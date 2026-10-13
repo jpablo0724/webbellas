@@ -1,0 +1,45 @@
+name: Publicar en cirugiascasaderecuperacionmedellin.com
+
+# En cada push a main compila la web y la publica en el hosting cPanel
+# (public_html), dejando el servidor idéntico a lo que hay en Git.
+# Necesita los secretos del repositorio CPANEL_URL, CPANEL_USER y CPANEL_TOKEN
+# (Settings → Secrets and variables → Actions).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-cpanel
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: produccion
+      url: https://cirugiascasaderecuperacionmedellin.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Compilar
+        run: npm run build
+
+      - name: Publicar en cPanel
+        env:
+          CPANEL_URL: ${{ secrets.CPANEL_URL }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
+        run: node scripts/deploy-cpanel.mjs
