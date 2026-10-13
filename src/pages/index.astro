@@ -1,5 +1,26 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image, getImage } from "astro:assets";
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/poppins/latin-600.css";
+import "@fontsource/poppins/latin-700.css";
+import "@fontsource/poppins/latin-800.css";
+import interRegular from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import poppinsExtraBold from "@fontsource/poppins/files/poppins-latin-800-normal.woff2?url";
 import { faqs } from "../data/faqs";
+
+// Las imágenes viven en src/assets/images: Astro las convierte a WebP en varios
+// tamaños al compilar. img("carpeta/foto.jpg") devuelve la imagen importada.
+const imageFiles = import.meta.glob<{ default: ImageMetadata }>("../assets/images/**/*.{jpg,jpeg,png}", {
+	eager: true,
+});
+function img(path: string): ImageMetadata {
+	const file = imageFiles[`../assets/images/${path}`];
+	if (!file) throw new Error(`No existe la imagen src/assets/images/${path}`);
+	return file.default;
+}
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const checklistLeft = [
@@ -50,13 +71,13 @@ const services = [
 		description:
 			"Instalaciones adaptadas para el cuidado postoperatorio, diseñadas para brindarte la comodidad, seguridad y tranquilidad que necesitas durante tu recuperación.",
 		images: [
-			`${base}/images/hospedaje/hospedaje-1.jpg`,
-			`${base}/images/hospedaje/hospedaje-2.jpg`,
-			`${base}/images/hospedaje/hospedaje-3.jpg`,
-			`${base}/images/hospedaje/hospedaje-4.jpg`,
-			`${base}/images/hospedaje/hospedaje-5.jpg`,
-			`${base}/images/hospedaje/hospedaje-6.jpg`,
-			`${base}/images/hospedaje/hospedaje-7.jpg`,
+			img("hospedaje/hospedaje-1.jpg"),
+			img("hospedaje/hospedaje-2.jpg"),
+			img("hospedaje/hospedaje-3.jpg"),
+			img("hospedaje/hospedaje-4.jpg"),
+			img("hospedaje/hospedaje-5.jpg"),
+			img("hospedaje/hospedaje-6.jpg"),
+			img("hospedaje/hospedaje-7.jpg"),
 		],
 	},
 	{
@@ -64,9 +85,9 @@ const services = [
 		description:
 			"Acompañamiento por profesionales con experiencia las 24 horas. Monitoreamos tu evolución y te brindamos atención continua para una recuperación segura y con tranquilidad.",
 		images: [
-			`${base}/images/servicios/enfermeria.jpg`,
-			`${base}/images/servicios/leidy/cuidado-de-enfermeria.png`,
-			`${base}/images/servicios/leidy/enfermeria.png`,
+			img("servicios/enfermeria.jpg"),
+			img("servicios/leidy/cuidado-de-enfermeria.png"),
+			img("servicios/leidy/enfermeria.png"),
 		],
 		// Encuadre por foto: las de leidy/ bajan para que se vea la paciente.
 		imagePositions: ["50% 20%", "50% 68%", "50% 25%"],
@@ -76,8 +97,8 @@ const services = [
 		description:
 			"Alimentación pensada para tu recuperación. Ofrecemos menús balanceados y personalizados según tus necesidades nutricionales para favorecer una adecuada cicatrización y bienestar.",
 		images: [
-			`${base}/images/servicios/nutricion.jpg`,
-			`${base}/images/servicios/leidy/nutricion-1.png`,
+			img("servicios/nutricion.jpg"),
+			img("servicios/leidy/nutricion-1.png"),
 		],
 		imagePositions: [undefined, "50% 40%"],
 	},
@@ -85,7 +106,7 @@ const services = [
 		title: "Limpieza y lavandería",
 		description:
 			"Comodidad en cada detalle. Nos encargamos de la limpieza y desinfección de tu habitación y del lavado de tus prendas para un ambiente adecuado en tu postoperatorio.",
-		image: `${base}/images/servicios/lavanderia.png`,
+		image: img("servicios/lavanderia.png"),
 		imagePosition: "50% 15%",
 	},
 	{
@@ -93,15 +114,15 @@ const services = [
 		description:
 			"Traslados seguros a tus citas médicas. Te acompañamos a controles, valoraciones y demás citas relacionadas con tu procedimiento, garantizando comodidad y puntualidad durante tu recuperación.",
 		images: [
-			`${base}/images/servicios/transporte-1.jpg`,
-			`${base}/images/servicios/transporte-2.jpg`,
+			img("servicios/transporte-1.jpg"),
+			img("servicios/transporte-2.jpg"),
 		],
 	},
 	{
 		title: "Guía en el cuidado postoperatorio",
 		description:
 			"Te brindamos orientación en cada etapa de tu proceso quirúrgico, desde el uso de fajas y prendas adecuadas hasta tus controles, cuidados y recomendaciones, para que tengas una recuperación exitosa.",
-		image: `${base}/images/servicios/guia.jpg`,
+		image: img("servicios/guia.jpg"),
 	},
 ];
 
@@ -109,53 +130,55 @@ const complementaryServices = [
 	{
 		title: "Masajes postquirúrgicos",
 		description: "Ayudan a reducir la inflamación y favorecen la recuperación.",
-		image: `${base}/images/complementarios/masajes.jpg`,
+		image: img("complementarios/masajes.jpg"),
 	},
 	{
 		title: "Spa Bellas y tratamientos faciales",
 		description:
 			"Procedimientos especializados para el cuidado, rejuvenecimiento y bienestar integral de tu piel.",
-		image: `${base}/images/complementarios/spa-bellas.jpg`,
+		image: img("complementarios/spa-bellas.jpg"),
 	},
 	{
 		title: "Bomba del dolor",
 		description: "Control continuo del dolor durante el postoperatorio.",
-		image: `${base}/images/complementarios/bomba-dolor.jpg`,
+		image: img("complementarios/bomba-dolor.jpg"),
 	},
 	{
 		title: "Cámara hiperbárica",
 		description: "Favorece la cicatrización y acelera la recuperación postoperatoria.",
-		image: `${base}/images/complementarios/camara-hiperbarica.jpg`,
+		image: img("complementarios/camara-hiperbarica.jpg"),
 	},
 	{
 		title: "Almacén Bellas",
 		description:
 			"Encuentra todo lo que necesitas para tu cuidado postoperatorio en un solo lugar como fajas, cojines, e insumos especializados.",
-		image: `${base}/images/complementarios/almacen-bellas.jpg`,
+		image: img("complementarios/almacen-bellas.jpg"),
 	},
 	{
 		title: "Sueroterapia",
 		description:
 			"Terapias intravenosas que ayudan en el manejo del dolor, la cicatrización, el aumento de los niveles de hemoglobina y el control de los síntomas postoperatorios.",
-		image: `${base}/images/complementarios/sueroterapia.jpg`,
+		image: img("complementarios/sueroterapia.jpg"),
 	},
 	{
 		title: "Turismo y transporte preoperatorio",
 		description:
 			"Descubre Medellín, su cultura y sus alrededores (Guatapé, Comuna 13 y más) y cuenta con nuestro servicio de transporte para tus salidas y traslados preoperatorios.",
-		images: [1, 2, 3, 4, 5, 6, 7].map((n) => `${base}/images/complementarios/turismo-${n}.jpg`),
+		images: [1, 2, 3, 4, 5, 6, 7].map((n) => img(`complementarios/turismo-${n}.jpg`)),
 	},
 	{
 		title: "Enfermería a domicilio",
-		image: `${base}/images/complementarios/enfermeria-domicilio.jpg`,
+		image: img("complementarios/enfermeria-domicilio.jpg"),
 		description:
 			"Una alternativa para recuperarte en casa con enfermería a domicilio, acompañándote desde el día de tu cirugía y durante todo tu proceso de recuperación con cuidado y apoyo profesional.",
 	},
 ];
 
-const wellbeingImage = `${base}/images/bienestar.jpg`;
-const logo = `${base}/images/logo.png`;
-const aboutBg = `${base}/images/about-bg-alpha.png`;
+const wellbeingImage = img("bienestar.jpg");
+const logo = img("logo.png");
+// Fondo de la portada en WebP: versión grande para escritorio y chica para móvil.
+const aboutBgLarge = await getImage({ src: img("about-bg-alpha.png"), width: 1150, format: "webp", quality: 70 });
+const aboutBgSmall = await getImage({ src: img("about-bg-alpha.png"), width: 700, format: "webp", quality: 70 });
 
 const instagramPosts = [
 	"https://www.instagram.com/p/DPckQ0XjKQR/",
@@ -166,30 +189,62 @@ const instagramPosts = [
 
 const siteUrl = new URL(`${base}/`, Astro.site).toString();
 const ogImage = new URL(`${base}/images/og-cover.jpg`, Astro.site).toString();
-const pageTitle = "Bellas Te Cuida | Casa de Recuperación Postoperatoria en Medellín";
+const pageTitle = "Casa de Recuperación en Medellín | Bellas Te Cuida";
 const pageDescription =
-	"Recovery House en Medellín especializada en cuidado postoperatorio de cirugía plástica, estética y reconstructiva. Hospedaje, enfermería 24h, nutrición, transporte y acompañamiento integral. Más de 10 años de experiencia.";
+	"Casa de recuperación postoperatoria en Medellín: hospedaje, enfermería 24 h, nutrición y transporte tras tu cirugía plástica. Más de 10 años cuidándote.";
+
+const logoImage = await getImage({ src: logo, format: "png" });
+const logoUrl = new URL(logoImage.src, Astro.site).toString();
 
 const businessSchema = {
 	"@context": "https://schema.org",
 	"@type": ["MedicalBusiness", "LodgingBusiness"],
+	"@id": `${siteUrl}#negocio`,
 	name: "Bellas Te Cuida - Casa de Recuperación",
+	alternateName: ["Bellas Te Cuida", "Bellas Te Cuida Recovery House"],
 	description: pageDescription,
 	image: ogImage,
+	logo: logoUrl,
 	url: siteUrl,
 	telephone: "+573023287951",
 	priceRange: "$$",
+	knowsLanguage: "es",
 	address: {
 		"@type": "PostalAddress",
 		addressLocality: "Medellín",
 		addressRegion: "Antioquia",
 		addressCountry: "CO",
 	},
-	areaServed: {
-		"@type": "City",
-		name: "Medellín",
+	areaServed: [
+		{ "@type": "City", name: "Medellín" },
+		{ "@type": "Country", name: "Colombia" },
+	],
+	contactPoint: {
+		"@type": "ContactPoint",
+		telephone: "+573023287951",
+		contactType: "customer service",
+		availableLanguage: ["Spanish"],
+		url: "https://wa.me/573023287951",
+	},
+	hasOfferCatalog: {
+		"@type": "OfferCatalog",
+		name: "Servicios de recuperación postoperatoria",
+		itemListElement: [...services, ...complementaryServices].map((service) => ({
+			"@type": "Offer",
+			itemOffered: { "@type": "Service", name: service.title, description: service.description },
+		})),
 	},
 	sameAs: ["https://www.instagram.com/bellastecuida/", "https://www.tiktok.com/@bellastecuida"],
+};
+
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"@id": `${siteUrl}#sitio`,
+	url: siteUrl,
+	name: "Bellas Te Cuida",
+	inLanguage: "es-CO",
+	publisher: { "@id": `${siteUrl}#negocio` },
 };
 
 const faqHalf = Math.ceil(faqs.length / 2);
@@ -217,7 +272,10 @@ const faqSchema = {
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/png" href={`${base}/favicon.png`} />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#26808b" />
+		<link rel="preload" href={interRegular} as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href={poppinsExtraBold} as="font" type="font/woff2" crossorigin />
 		<meta name="generator" content={Astro.generator} />
 
 		<title>{pageTitle}</title>
@@ -242,22 +300,20 @@ const faqSchema = {
 
 		<script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
 		<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
-			rel="stylesheet"
-		/>
 	</head>
 	<body>
-		<section class="about" style={`background-image: url(${aboutBg});`}>
+		<section
+			class="about"
+			style={`--about-bg: url(${aboutBgLarge.src}); --about-bg-sm: url(${aboutBgSmall.src});`}
+		>
 			<div class="about__blob"></div>
 			<div class="about__ring"></div>
 
 			<div class="about__container">
 				<div class="about__content">
-					<img class="about__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación" />
+					<Image class="about__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación en Medellín" loading="eager" />
 					<h1 class="about__title">
 						Casa de Recuperación<br />
 						Bellas Te Cuida en Medellín
@@ -320,11 +376,12 @@ const faqSchema = {
 
 				<div class="about__media">
 					<div class="about__video-frame">
-						<img
-							src={`${base}/images/portada-video.jpg`}
-							alt="Cuidado Postoperatorio en Medellín"
-							width="800"
-							height="1422"
+						<Image
+							src={img("portada-video.jpg")}
+							alt="Video de presentación de la casa de recuperación Bellas Te Cuida en Medellín"
+							widths={[240, 430, 640, 860]}
+							sizes="(max-width: 520px) 240px, (max-width: 900px) 285px, 430px"
+							loading="eager"
 						/>
 						<button id="about-play" class="about__play" aria-label="Reproducir video" type="button">
 							<svg viewBox="0 0 24 24" width="20" height="20">
@@ -344,6 +401,7 @@ const faqSchema = {
 					class="video-dialog__video"
 					controls
 					playsinline
+					preload="none"
 					src={`${base}/videos/bellas-casa-de-recuperacion.mp4`}
 				></video>
 			</dialog>
@@ -447,7 +505,7 @@ const faqSchema = {
 
 		<section class="services">
 			<div class="services__container">
-				<h2 class="services__title">Servicios</h2>
+				<h2 class="services__title">Servicios de nuestra casa de recuperación</h2>
 
 				<div class="services__grid">
 					{services.map((service) => (
@@ -457,9 +515,11 @@ const faqSchema = {
 								<div class="service-card__media service-card__media--gallery" data-gallery>
 									<div class="gallery__track">
 										{service.images.map((src, i) => (
-											<img
+											<Image
 												src={src}
-												alt={service.title}
+												alt={`${service.title} en Bellas Te Cuida, Medellín (foto ${i + 1})`}
+												widths={[360, 560, 760]}
+												sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 380px"
 												loading="lazy"
 												style={(service.imagePositions?.[i] ?? service.imagePosition) ? `object-position: ${service.imagePositions?.[i] ?? service.imagePosition};` : undefined}
 											/>
@@ -479,9 +539,11 @@ const faqSchema = {
 								</div>
 							) : (
 								<div class="service-card__media">
-									<img
-										src={service.image}
-										alt={service.title}
+									<Image
+										src={service.image!}
+										alt={`${service.title} en Bellas Te Cuida, Medellín`}
+										widths={[360, 560, 760]}
+										sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 380px"
 										loading="lazy"
 										style={service.imagePosition ? `object-position: ${service.imagePosition};` : undefined}
 									/>
@@ -504,8 +566,14 @@ const faqSchema = {
 							{item.images ? (
 								<div class="complementary-card__media complementary-card__media--gallery" data-gallery>
 									<div class="gallery__track">
-										{item.images.map((src) => (
-											<img src={src} alt={item.title} loading="lazy" />
+										{item.images.map((src, i) => (
+											<Image
+												src={src}
+												alt={`${item.title} desde Medellín (foto ${i + 1})`}
+												widths={[300, 480, 640]}
+												sizes="(max-width: 520px) 92vw, (max-width: 900px) 46vw, 280px"
+												loading="lazy"
+											/>
 										))}
 									</div>
 									<button class="gallery__nav gallery__nav--prev" aria-label="Foto anterior" type="button">
@@ -522,7 +590,13 @@ const faqSchema = {
 								</div>
 							) : item.image && (
 								<div class="complementary-card__media">
-									<img src={item.image} alt={item.title} loading="lazy" />
+									<Image
+										src={item.image}
+										alt={`${item.title} - Bellas Te Cuida Medellín`}
+										widths={[300, 480, 640]}
+										sizes="(max-width: 520px) 92vw, (max-width: 900px) 46vw, 280px"
+										loading="lazy"
+									/>
 								</div>
 							)}
 							<h3 class="complementary-card__title">{item.title}</h3>
@@ -536,7 +610,13 @@ const faqSchema = {
 		<section class="wellbeing">
 			<div class="wellbeing__container">
 				<div class="wellbeing__media">
-					<img src={wellbeingImage} alt="Porque tu bienestar es nuestra prioridad" loading="lazy" />
+					<Image
+						src={wellbeingImage}
+						alt="Paciente acompañada durante su recuperación postoperatoria en Bellas Te Cuida"
+						widths={[480, 720, 1000]}
+						sizes="(max-width: 900px) 92vw, 600px"
+						loading="lazy"
+					/>
 				</div>
 				<div class="wellbeing__content">
 					<h2 class="wellbeing__title">Porque tu bienestar es nuestra prioridad</h2>
@@ -553,7 +633,7 @@ const faqSchema = {
 
 		<section class="testimonials">
 			<div class="testimonials__container">
-				<h2 class="testimonials__title">Testimonios</h2>
+				<h2 class="testimonials__title">Testimonios de nuestras pacientes</h2>
 
 				<div class="testimonials__grid">
 					{instagramPosts.map((url) => (
@@ -564,6 +644,9 @@ const faqSchema = {
 									data-instgrm-permalink={url}
 									data-instgrm-version="14"
 								>
+									<a href={url} target="_blank" rel="noopener noreferrer">
+										Ver testimonio de una paciente de Bellas Te Cuida en Instagram
+									</a>
 								</blockquote>
 							</div>
 						</div>
@@ -631,7 +714,7 @@ const faqSchema = {
 
 		<footer class="site-footer">
 			<div class="site-footer__container">
-				<img class="site-footer__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación" />
+				<Image class="site-footer__logo" src={logo} alt="Bellas Te Cuida - Casa de Recuperación en Medellín" loading="lazy" />
 				<p class="site-footer__tagline">En Bellas te cuidamos por dentro y por fuera.</p>
 
 				<a class="site-footer__contact" href="tel:+573023287951">+57 302 328 7951</a>
@@ -701,7 +784,32 @@ const faqSchema = {
 			<span class="whatsapp-float__label">¿Hablamos?</span>
 		</a>
 
-		<script async src="https://www.instagram.com/embed.js"></script>
+		<script>
+			// Los testimonios de Instagram pesan ~2 MB: se cargan solo cuando la sección
+			// está por aparecer en pantalla, para no frenar la carga inicial.
+			const testimonials = document.querySelector(".testimonials");
+			if (testimonials) {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						if (!entries.some((entry) => entry.isIntersecting)) return;
+						observer.disconnect();
+						const script = document.createElement("script");
+						script.src = "https://www.instagram.com/embed.js";
+						script.async = true;
+						document.body.append(script);
+					},
+					{ rootMargin: "600px 0px" },
+				);
+				observer.observe(testimonials);
+
+				// Instagram crea iframes sin título; se los ponemos por accesibilidad.
+				new MutationObserver(() => {
+					testimonials.querySelectorAll("iframe:not([title])").forEach((frame, i) => {
+						frame.setAttribute("title", `Testimonio en Instagram ${i + 1}`);
+					});
+				}).observe(testimonials, { childList: true, subtree: true });
+			}
+		</script>
 
 		<script>
 			const dialog = document.getElementById("about-video-dialog") as HTMLDialogElement;
@@ -751,10 +859,20 @@ const faqSchema = {
 				prevButton?.addEventListener("click", () => goTo(currentIndex() - 1));
 				nextButton?.addEventListener("click", () => goTo(currentIndex() + 1));
 
-				track.addEventListener("scroll", () => {
-					const active = currentIndex();
-					dots.forEach((dot, i) => dot.classList.toggle("is-active", i === active));
-				});
+				let pending = false;
+				track.addEventListener(
+					"scroll",
+					() => {
+						if (pending) return;
+						pending = true;
+						requestAnimationFrame(() => {
+							pending = false;
+							const active = currentIndex();
+							dots.forEach((dot, i) => dot.classList.toggle("is-active", i === active));
+						});
+					},
+					{ passive: true },
+				);
 			});
 		</script>
 	</body>
@@ -788,6 +906,7 @@ const faqSchema = {
 		position: relative;
 		overflow: hidden;
 		background: #eef2f2;
+		background-image: var(--about-bg);
 		padding: 32px 0 96px;
 		background-repeat: no-repeat;
 		background-size: 1150px auto;
@@ -845,7 +964,7 @@ const faqSchema = {
 
 	.about__lead {
 		margin: 0 0 32px;
-		color: #7c8892;
+		color: #66727c;
 		font-size: 16px;
 		line-height: 1.7;
 		max-width: 46ch;
@@ -956,6 +1075,7 @@ const faqSchema = {
 		}
 
 		.about {
+			background-image: var(--about-bg-sm);
 			background-size: 700px auto;
 			background-position: right 0 bottom 20px;
 		}
@@ -1022,7 +1142,8 @@ const faqSchema = {
 	}
 
 	.trust {
-		background: #45b0bd;
+		/* Turquesa oscurecido para contraste AA con texto blanco (4,6:1). */
+		background: #26808b;
 		padding: 72px 0;
 	}
 
@@ -1060,7 +1181,7 @@ const faqSchema = {
 	}
 
 	.trust__accent {
-		color: rgba(255, 255, 255, 0.55);
+		color: #c9f4ef;
 		font-weight: 600;
 	}
 
@@ -1074,7 +1195,7 @@ const faqSchema = {
 
 	.trust__desc {
 		margin: 0;
-		color: rgba(255, 255, 255, 0.8);
+		color: white;
 		font-size: 14px;
 		line-height: 1.5;
 	}
@@ -1133,7 +1254,7 @@ const faqSchema = {
 
 	.service-card__title {
 		margin: 0;
-		color: #d9488b;
+		color: #c93a7c; /* rosa de marca un tono más oscuro: contraste AA en texto pequeño */
 		font-family: "Poppins", "Segoe UI", sans-serif;
 		font-size: 18px;
 		font-weight: 700;
@@ -1243,7 +1364,7 @@ const faqSchema = {
 
 	.service-card__desc {
 		margin: 0;
-		color: #7c8892;
+		color: #66727c;
 		font-size: 14px;
 		line-height: 1.65;
 	}
@@ -1319,7 +1440,7 @@ const faqSchema = {
 
 	.complementary-card__title {
 		margin: 20px 20px 0;
-		color: #d9488b;
+		color: #c93a7c;
 		font-family: "Poppins", "Segoe UI", sans-serif;
 		font-size: 17px;
 		font-weight: 700;
@@ -1328,7 +1449,7 @@ const faqSchema = {
 
 	.complementary-card__desc {
 		margin: 10px 20px 24px;
-		color: #7c8892;
+		color: #66727c;
 		font-size: 14px;
 		line-height: 1.6;
 	}
@@ -1346,7 +1467,7 @@ const faqSchema = {
 	}
 
 	.wellbeing {
-		background: #45b0bd;
+		background: #26808b;
 		padding: 96px 0;
 	}
 
@@ -1385,7 +1506,7 @@ const faqSchema = {
 
 	.wellbeing__desc {
 		margin: 0;
-		color: rgba(255, 255, 255, 0.9);
+		color: white;
 		font-size: 16px;
 		line-height: 1.75;
 	}
@@ -1494,7 +1615,7 @@ const faqSchema = {
 
 	.faq__intro {
 		margin: 0 0 40px;
-		color: #7c8892;
+		color: #66727c;
 		font-size: 16px;
 		line-height: 1.7;
 		text-align: center;
@@ -1641,7 +1762,7 @@ const faqSchema = {
 		display: inline-block;
 		padding: 14px 28px;
 		border-radius: 999px;
-		background: #d9488b;
+		background: #c93a7c;
 		color: white;
 		font-weight: 700;
 		text-decoration: none;
@@ -1668,7 +1789,7 @@ const faqSchema = {
 	}
 
 	.faq__note strong {
-		color: #d9488b;
+		color: #b02d6a;
 	}
 
 	@media (max-width: 600px) {
@@ -1695,7 +1816,7 @@ const faqSchema = {
 	}
 
 	.site-footer {
-		background: #45b0bd;
+		background: #26808b;
 		padding: 56px 0;
 	}
 
