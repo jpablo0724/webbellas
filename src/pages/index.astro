@@ -405,8 +405,15 @@ const faqSchema = {
 					controls
 					playsinline
 					preload="none"
-					src={`${base}/videos/bellas-casa-de-recuperacion.mp4`}
-				></video>
+				>
+					{/* Misma resolución y audio que el original. AV1 pesa la mitad; los
+					    navegadores que no lo reproducen usan la versión H.264. */}
+					<source
+						src={`${base}/videos/bellas-casa-de-recuperacion-av1.mp4`}
+						type='video/mp4; codecs="av01.0.08M.08, mp4a.40.2"'
+					/>
+					<source src={`${base}/videos/bellas-casa-de-recuperacion.mp4`} type="video/mp4" />
+				</video>
 			</dialog>
 		</section>
 
