@@ -24,6 +24,18 @@ jobs:
       name: produccion
       url: https://cirugiascasaderecuperacionmedellin.com
     steps:
+      - name: Verificar secretos de cPanel
+        env:
+          CPANEL_URL: ${{ secrets.CPANEL_URL }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
+        run: |
+          falta=0
+          for v in CPANEL_URL CPANEL_USER CPANEL_TOKEN; do
+            if [ -z "${!v}" ]; then echo "::error::Falta el secreto $v en Settings > Secrets and variables > Actions"; falta=1; fi
+          done
+          exit $falta
+
       - uses: actions/checkout@v5
 
       - uses: actions/setup-node@v5

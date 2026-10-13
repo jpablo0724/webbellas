@@ -14,6 +14,13 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 
+// En GitHub Actions el error se muestra como anotación (visible sin abrir el log).
+for (const ev of ['uncaughtException', 'unhandledRejection']) process.on(ev, (err) => {
+	if (process.env.GITHUB_ACTIONS) console.log(`::error::${err.message}`);
+	console.error(err);
+	process.exit(1);
+});
+
 const SITE = 'https://cirugiascasaderecuperacionmedellin.com';
 const DIST = path.resolve('dist');
 // Carpetas del servidor que no vienen de Git y nunca se tocan.
