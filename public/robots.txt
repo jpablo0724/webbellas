@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jpablo0724.github.io/webbellas/sitemap.xml
+Sitemap: https://cirugiascasaderecuperacionmedellin.com/sitemap.xml
